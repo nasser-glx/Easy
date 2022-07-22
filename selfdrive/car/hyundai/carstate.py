@@ -62,8 +62,8 @@ class CarState(CarStateBase):
     cp_sas = cp2 if self.sas_bus else cp
     cp_scc = cp2 if self.scc_bus == 1 else cp_cam if self.scc_bus == 2 else cp
 
-    metric = not cp.vl["CLU11"]["CF_Clu_SPEED_UNIT"]
-    speed_conv = CV.KPH_TO_MS if metric else CV.MPH_TO_MS
+    self.metric = not cp.vl["CLU11"]["CF_Clu_SPEED_UNIT"]
+    self.speed_conv = CV.KPH_TO_MS if self.metric else CV.MPH_TO_MS
 
     ret = car.CarState.new_message()
 
@@ -76,7 +76,7 @@ class CarState(CarStateBase):
                                             cp.vl["WHL_SPD11"]["WHL_SPD_RL"], cp.vl["WHL_SPD11"]["WHL_SPD_RR"])
 
     ret.vEgoRaw = (ret.wheelSpeeds.fl + ret.wheelSpeeds.fr + ret.wheelSpeeds.rl + ret.wheelSpeeds.rr) / 4.
-    ret.vEgoCluster = cp.vl["CLU15"]["CF_Clu_VehicleSpeed"] if metric else cp.vl["CLU15"]["CF_Clu_VehicleSpeed2"]
+    ret.vEgoCluster = cp.vl["CLU15"]["CF_Clu_VehicleSpeed"] if self.metric else cp.vl["CLU15"]["CF_Clu_VehicleSpeed2"]
     ret.vEgo, ret.aEgo = self.update_speed_kf(ret.vEgoRaw)
 
     ret.standstill = ret.vEgoRaw < 0.01
@@ -107,8 +107,8 @@ class CarState(CarStateBase):
     ret.cruiseState.enabledAcc = ret.cruiseState.enabled
 
     if ret.cruiseState.enabled:
-      ret.cruiseState.speed = cp_scc.vl["SCC11"]["VSetDis"] * speed_conv if not self.no_radar else \
-                              cp.vl["LVR12"]["CF_Lvr_CruiseSet"] * speed_conv
+      ret.cruiseState.speed = cp_scc.vl["SCC11"]["VSetDis"] * self.speed_conv if not self.no_radar else \
+                              cp.vl["LVR12"]["CF_Lvr_CruiseSet"] * self.speed_conv
     else:
       ret.cruiseState.speed = 0
 

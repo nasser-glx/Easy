@@ -750,7 +750,7 @@ EVENTS: Dict[int, Dict[str, Union[Alert, Callable[[Any, messaging.SubMaster, boo
   EventName.overheat: {
     ET.PERMANENT: Alert(
       #"System Overheated",
-      "장치 과열됨",
+      "النظام ساخن",
       "",
       AlertStatus.normal, AlertSize.small,
       Priority.LOWER, VisualAlert.none, AudibleAlert.none, 0., 0., .2),
@@ -777,7 +777,7 @@ EVENTS: Dict[int, Dict[str, Union[Alert, Callable[[Any, messaging.SubMaster, boo
     #ET.PERMANENT: NormalPermanentAlert("Calibration Invalid", "Remount Device and Recalibrate"),
     #ET.SOFT_DISABLE: SoftDisableAlert("Calibration Invalid: Remount Device & Recalibrate"),
     #ET.NO_ENTRY: NoEntryAlert("Calibration Invalid: Remount Device & Recalibrate"),
-    ET.PERMANENT: NormalPermanentAlert("خطأ في المعايرة "،" أعد المعايرة بعد تغيير موقع الجهاز."),
+    ET.PERMANENT: NormalPermanentAlert("خطأ في المعايرة "," أعد المعايرة بعد تغيير موقع الجهاز."),
     ET.SOFT_DISABLE: SoftDisableAlert("خطأ في المعايرة: أعد المعايرة بعد تغيير موقع الجهاز"),
     ET.NO_ENTRY: NoEntryAlert("خطأ في المعايرة: أعد المعايرة بعد تغيير موقع الجهاز"),
   },
@@ -891,7 +891,7 @@ EVENTS: Dict[int, Dict[str, Union[Alert, Callable[[Any, messaging.SubMaster, boo
     #ET.PERMANENT: NormalPermanentAlert("Low Memory", "Reboot your Device"),
     #ET.NO_ENTRY: NoEntryAlert("Low Memory: Reboot Your Device",
     ET.SOFT_DISABLE: SoftDisableAlert("ذاكرة غير كافية: أعد تشغيل الجهاز"),
-    ET.PERMANENT: NormalPermanentAlert("ذاكرة غير كافية "،" الرجاء إعادة تشغيل جهازك ""),
+    ET.PERMANENT: NormalPermanentAlert("ذاكرة غير كافية "," الرجاء إعادة تشغيل جهازك "),
     ET.NO_ENTRY: NoEntryAlert("ذاكرة غير كافية: أعد تشغيل الجهاز",
                               audible_alert=AudibleAlert.chimeDisengage),
   },

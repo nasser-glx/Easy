@@ -750,7 +750,7 @@ EVENTS: Dict[int, Dict[str, Union[Alert, Callable[[Any, messaging.SubMaster, boo
   EventName.overheat: {
     ET.PERMANENT: Alert(
       #"System Overheated",
-      "장치 과열됨",
+      "النظام ساخن",
       "",
       AlertStatus.normal, AlertSize.small,
       Priority.LOWER, VisualAlert.none, AudibleAlert.none, 0., 0., .2),

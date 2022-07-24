@@ -258,7 +258,7 @@ DevicePanel::DevicePanel(QWidget* parent) : QWidget(parent) {
   });
 
   //QPushButton *poweroff_btn = new QPushButton("Power Off");
-  QPushButton *poweroff_btn = new QPushButton("종료");
+  QPushButton *poweroff_btn = new QPushButton("إيقاف التشغيل");
   poweroff_btn->setObjectName("poweroff_btn");
   power_layout->addWidget(poweroff_btn);
   QObject::connect(poweroff_btn, &QPushButton::clicked, [=]() {

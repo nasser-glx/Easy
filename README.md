@@ -1,438 +1,144 @@
-![](https://user-images.githubusercontent.com/37757984/127420744-89ca219c-8f8e-46d3-bccf-c1cb53b81bb1.png)
 
-crwusiz openpilot
-=====
+**هذه الملفات مبنية من المهندس أحمد برناوي وفريقه (ناصر الخالدي - ثامر الحميد) لتطوير أنظمة القيادة لهيونداي , كيا , جينسس**
 
-<b> crwusiz branch is comma.ai devel-staging base xx979xx HKG_community source add </b>
-- <b> v0.8.9 [ allow white panda and gray panda, OP3T support (installer/howto_op3t_update.md) ] </b>
-- <b> comma three not support use v0.8.10 </b>
-- If you have any questions, please send a message to crwusiz from discord. if you like this Branch <b> [Donate](https://paypal.me/crwusiz) </b>for me
+https://github.com/xx979xx/openpilot
 
-[![](https://i.imgur.com/TMtVMV8.png)](#)
+إنه مفتوح المصدر ومرخص من معهد ماساتشوستس للتكنولوجيا. بتثبيت هذا البرنامج ، فإنك تتحمل كامل المسؤولية عن أي شيء قد يحدث أثناء استخدامه. جميع المساهمين في هذه الشركة غير مسؤولين. استخدمه على مسؤوليتك الخاصة  <b>استخدام على مسؤوليتك الخاصة.</b>
 
-- kor NanumGothic font / Comma Bootlogo / Bootanimation Auto install
-- event message, ui kor translate
-- steeringwheel rotate, tpms display
-- brake, bsd, autohold, gps icon
-- sidebar wifi ipaddress / battery charging and battery percent display
-- lateralcontrolselect ( PID / INDI / LQR )
-- mfcselect ( LKAS / LDWS / LFA )
-- longcontrolselect ( MAD / LONG )
-- add toggle / function / simple ui
 
-## Source Code Reference
-- https://github.com/commaai/openpilot
-- https://github.com/xx979xx/openpilo
-- https://github.com/xps-genesis/openpilot
-- https://github.com/kegman/openpilot
-- https://github.com/dragonpilot-community/dragonpilot
-- https://github.com/wirelessnet2/openpilot
-- https://github.com/sshane/openpilot
-- https://github.com/arne182/ArnePilot
-- https://github.com/neokii
-- https://github.com/openpilotusers
-- https://github.com/Circuit-Pro/openpilot
-- - -
-## Harness Cable and Car Year Compatible Chart
+------------------------------------------------------
 
-cable order -> https://smartstore.naver.com/hyotrade/products/5341431170
 
-[![](https://i.imgur.com/sRcmaeS.png)](#)
-[![](https://i.imgur.com/arZrs6d.png)](#)
-[![](https://i.imgur.com/uqJlVrC.jpg)](#)
+![](https://i.imgur.com/JVj5aZc.jpg)
 
-## chevrolet bolt branch
-- https://github.com/JasonJShuler/openpilot
-- https://github.com/hanabi95/openpilot
-- https://github.com/jc01rho-openpilot-BoltEV2019-KoKr
-- https://github.com/parksunkyu81
-- - -
-Table of Contents
+جدول المحتويات
 =======================
 
-* [What is openpilot?](#what-is-openpilot)
-* [Integration with Stock Features](#integration-with-stock-features)
-* [Supported Hardware](#supported-hardware)
-* [Supported Cars](#supported-cars)
-* [Community Maintained Cars and Features](#community-maintained-cars-and-features)
-* [Installation Instructions](#installation-instructions)
-* [Limitations of openpilot ALC and LDW](#limitations-of-openpilot-alc-and-ldw)
-* [Limitations of openpilot ACC and FCW](#limitations-of-openpilot-acc-and-fcw)
-* [Limitations of openpilot DM](#limitations-of-openpilot-dm)
-* [User Data and comma Account](#user-data-and-comma-account)
-* [Safety and Testing](#safety-and-testing)
-* [Testing on PC](#testing-on-pc)
-* [Community and Contributing](#community-and-contributing)
-* [Directory Structure](#directory-structure)
-* [Licensing](#licensing)
+* [ماهو الأوبن بايلوت؟](#ماهو-الأوبن-بايلوت؟)
+* [عمله على السيارة](#running-in-a-car)
+* [عمله على الكمبيوتر](#running-on-pc)
+* [المجتمع والمساهمة](#community-and-contributing)
+* [بينانات المسخدم وحساب كوما](#user-data-and-comma-account)
+* [السلامة والاختبار](#safety-and-testing)
+* [بنية الدليل](#directory-structure)
+* [الترخيص](#licensing)
 
 ---
 
-What is openpilot?
+ماهو الأوبن بايلوت ؟
 ------
 
-[openpilot](http://github.com/commaai/openpilot) is an open source driver assistance system. Currently, openpilot performs the functions of Adaptive Cruise Control (ACC), Automated Lane Centering (ALC), Forward Collision Warning (FCW) and Lane Departure Warning (LDW) for a growing variety of supported [car makes, models and model years](#supported-cars). In addition, while openpilot is engaged, a camera based Driver Monitoring (DM) feature alerts distracted and asleep drivers.
+[القائد الآلي](http://github.com/commaai/openpilot) هو نظام مفتوح المصدر لمساعدة السائق. حاليًا ، يؤدي برنامج القائد الآلي وظائف التحكم التكيفي في القيادة (ACC) ، وتمركز المسار الآلي (ALC) ، والتحذير من الاصطدام الأمامي (FCW) ، والتحذير من مغادرة المسار (LDW) لمجموعة متزايدة من [السيارات المدعومة والموديلات الحديثة كل عام](docs/CARS.md). بالإضافة أثناء تشغيل الأوبن بايلوت , تعمل كاميرا مراقبة السائق (DM) على مراقبة السائق المشتت الإنتباه والنائم أثناء عمل النظام. لمزيد من المعلومات [ تكامل المركبة ](docs/INTEGRATION.md) و [محدودية](docs/LIMITATIONS.md).
 
 <table>
   <tr>
-    <td><a href="https://www.youtube.com/watch?v=mgAbfr42oI8" title="YouTube" rel="noopener"><img src="https://i.imgur.com/kAtT6Ei.png"></a></td>
-    <td><a href="https://www.youtube.com/watch?v=394rJKeh76k" title="YouTube" rel="noopener"><img src="https://i.imgur.com/lTt8cS2.png"></a></td>
-    <td><a href="https://www.youtube.com/watch?v=1iNOc3cq8cs" title="YouTube" rel="noopener"><img src="https://i.imgur.com/ANnuSpe.png"></a></td>
-    <td><a href="https://www.youtube.com/watch?v=Vr6NgrB-zHw" title="YouTube" rel="noopener"><img src="https://i.imgur.com/Qypanuq.png"></a></td>
+    <td><a href="https://youtu.be/Asq9IBZ5EL8" title="Video By Greer Viau"><img src="https://i.imgur.com/1aVz6fu.png"></a></td>
+    <td><a href="https://youtu.be/YfMKV0BCS3E" title="Video By Logan LeGrand"><img src="https://i.imgur.com/U2kBp1r.jpg"></a></td>
+    <td><a href="https://youtu.be/fE3jcvNPKuU" title="Video By Charlie Kim"><img src="https://i.imgur.com/PInrzIG.jpg"></a></td>
+    <td><a href="https://youtu.be/-IkImTe1NYE" title="Video By Aragon"><img src="https://i.imgur.com/04VNzPf.jpg"></a></td>
   </tr>
   <tr>
-    <td><a href="https://www.youtube.com/watch?v=Ug41KIKF0oo" title="YouTube" rel="noopener"><img src="https://i.imgur.com/3caZ7xM.png"></a></td>
-    <td><a href="https://www.youtube.com/watch?v=NVR_CdG1FRg" title="YouTube" rel="noopener"><img src="https://i.imgur.com/bAZOwql.png"></a></td>
-    <td><a href="https://www.youtube.com/watch?v=tkEvIdzdfUE" title="YouTube" rel="noopener"><img src="https://i.imgur.com/EFINEzG.png"></a></td>
-    <td><a href="https://www.youtube.com/watch?v=_P-N1ewNne4" title="YouTube" rel="noopener"><img src="https://i.imgur.com/gAyAq22.png"></a></td>
+    <td><a href="https://youtu.be/iIUICQkdwFQ" title="Video By Logan LeGrand"><img src="https://i.imgur.com/b1LHQTy.jpg"></a></td>
+    <td><a href="https://youtu.be/XOsa0FsVIsg" title="Video By PinoyDrives"><img src="https://i.imgur.com/6FG0Bd8.jpg"></a></td>
+    <td><a href="https://youtu.be/bCwcJ98R_Xw" title="Video By JS"><img src="https://i.imgur.com/zO18CbW.jpg"></a></td>
+    <td><a href="https://youtu.be/BQ0tF3MTyyc" title="Video By Tsai-Fi"><img src="https://i.imgur.com/eZzelq3.jpg"></a></td>
   </tr>
 </table>
 
-Integration with Stock Features
+عمله على السيارة
 ------
 
-In all supported cars:
-* Stock Lane Keep Assist (LKA) and stock ALC are replaced by openpilot ALC, which only functions when openpilot is engaged by the user.
-* Stock LDW is replaced by openpilot LDW.
+لاستخدام نظام الاوبن بايلوت تحتاج إلى أربعة أشياء
+* هذا البرنامج إنه مجاني ومتاح هنا.
+* إحدى[ أكثر من 150 سيارة مدعومة ](docs/CARS.md). نحن ندعم هوندا, تويوتا ، هيونداي ، نيسان ، كيا ، كرايسلر ، لكزس ، أكورا ، أودي ، فولكس فاجن ، وأكثر من ذلك. إذا كانت سيارتك غير مدعومة, ولاكن يجب أن يكون لديك نظام مثبت السرعة التكيفي ومساعد الحفاظ على المسار لكي تستطيع تشغيل نظام الاوبن بايلوت على مركبتك
+* الجهاز يدهم تشعيل البرنامج [كوما ثلاثة](https://comma.ai/shop/products/two), [كوما ثلاثة](https://comma.ai/shop/products/three), أو إذا كنت ترغب في التجربة, a [كمبيوتر أوبونتو مع كاميرات الويب](https://github.com/commaai/openpilot/tree/master/tools/webcam).
+* طريقة للاتصال بسيارتك. باستخدام كوما اثنين أو ثلاثة ، تحتاج فقط إلى ملف [ظفيرة السيارة](https://comma.ai/shop/products/car-harness). مع الايون الذهبي أو الكمبيوتر الشخصي ، تحتاج أيضًا إلى ملف [البلاك باندا](https://comma.ai/shop/products/panda).
 
-Additionally, on specific supported cars (see ACC column in [supported cars](#supported-cars)):
-* Stock ACC is replaced by openpilot ACC.
-* openpilot FCW operates in addition to stock FCW.
+لدينا تعليمات مفصلة عن [كيفية تركيب الجهاز في السيارة](https://comma.ai/setup).
 
-openpilot should preserve all other vehicle's stock features, including, but are not limited to: FCW, Automatic Emergency Braking (AEB), auto high-beam, blind spot warning, and side collision warning.
-
-Supported Hardware
+عمله على الكمبيوتر
 ------
 
-At the moment, openpilot supports the EON Gold DevKit, [comma two](https://comma.ai/shop/products/two), and [comma three](https://comma.ai/shop/products/three). A [car harness](https://comma.ai/shop/products/car-harness) is recommended to connect your device to the car. For experimental purposes, openpilot can also run on an Ubuntu computer with external [webcams](https://github.com/commaai/openpilot/tree/master/tools/webcam).
+يمكن تشغيل جميع خدمات القائد الآلي كالمعتاد على جهاز كمبيوتر ، حتى بدون أجهزة خاصة أو سيارة. لتطوير أو تجربة القائد الآلي ، يمكنك تشغيل القائد الآلي على بيانات مسجلة أو محاكاة.
 
-Supported Cars
+باستخدام أدوات القائد الآلي ، يمكنك رسم السجلات وإعادة تشغيل محركات الأقراص ومشاهدة تدفقات الكاميرا كاملة الدقة. يرى [the tools README](tools/README.md) للمزيد من المعلومات.
+
+يمكنك أيضًا تشغيل القائد الآلي في المحاكاة [مع محاكي كلارا](tools/sim/README.md). هذا يسمح لبرنامج القائد الآلي بالقيادة حول سيارة افتراضية على جهاز نظام يوبينتو الخاص بك. يجب أن يستغرق الإعداد بالكامل بضع دقائق فقط ، ولكنه يتطلب وحدة معالجة رسومات جيدة.
+
+
+المجتمع والمساهمة
 ------
 
-| Make      | Model (US Market Reference)   | Supported Package | ACC              | No ACC accel below | No ALC below      |
-| ----------| ------------------------------| ------------------| -----------------| -------------------| ------------------|
-| Acura     | ILX 2016-19                   | AcuraWatch Plus   | openpilot        | 25mph<sup>1</sup>  | 25mph             |
-| Acura     | RDX 2016-18                   | AcuraWatch Plus   | openpilot        | 25mph<sup>1</sup>  | 12mph             |
-| Acura     | RDX 2019-21                   | All               | Stock            | 0mph               | 3mph              |
-| Honda     | Accord 2018-20                | All               | Stock            | 0mph               | 3mph              |
-| Honda     | Accord Hybrid 2018-20         | All               | Stock            | 0mph               | 3mph              |
-| Honda     | Civic Hatchback 2017-21       | Honda Sensing     | Stock            | 0mph               | 12mph             |
-| Honda     | Civic Coupe 2016-18           | Honda Sensing     | openpilot        | 0mph               | 12mph             |
-| Honda     | Civic Coupe 2019-20           | All               | Stock            | 0mph               | 2mph<sup>2</sup>  |
-| Honda     | Civic Sedan 2016-18           | Honda Sensing     | openpilot        | 0mph               | 12mph             |
-| Honda     | Civic Sedan 2019-20           | All               | Stock            | 0mph               | 2mph<sup>2</sup>  |
-| Honda     | CR-V 2015-16                  | Touring           | openpilot        | 25mph<sup>1</sup>  | 12mph             |
-| Honda     | CR-V 2017-21                  | Honda Sensing     | Stock            | 0mph               | 12mph             |
-| Honda     | CR-V Hybrid 2017-2019         | Honda Sensing     | Stock            | 0mph               | 12mph             |
-| Honda     | e 2020                        | All 		          | Stock            | 0mph               | 3mph              |
-| Honda     | Fit 2018-19                   | Honda Sensing     | openpilot        | 25mph<sup>1</sup>  | 12mph             |
-| Honda     | HR-V 2019-20                  | Honda Sensing     | openpilot        | 25mph<sup>1</sup>  | 12mph             |
-| Honda     | Insight 2019-21               | All               | Stock            | 0mph               | 3mph              |
-| Honda     | Inspire 2018                  | All               | Stock            | 0mph               | 3mph              |
-| Honda     | Odyssey 2018-20               | Honda Sensing     | openpilot        | 25mph<sup>1</sup>  | 0mph              |
-| Honda     | Passport 2019                 | All               | openpilot        | 25mph<sup>1</sup>  | 12mph             |
-| Honda     | Pilot 2016-19                 | Honda Sensing     | openpilot        | 25mph<sup>1</sup>  | 12mph             |
-| Honda     | Ridgeline 2017-21             | Honda Sensing     | openpilot        | 25mph<sup>1</sup>  | 12mph             |
-| Hyundai   | Palisade 2020-21              | All               | Stock            | 0mph               | 0mph              |
-| Hyundai   | Sonata 2020-21                | All               | Stock            | 0mph               | 0mph              |
-| Lexus     | CT Hybrid 2017-18             | LSS               | Stock<sup>3</sup>| 0mph               | 0mph              |
-| Lexus     | ES 2019-21                    | All               | openpilot        | 0mph               | 0mph              |
-| Lexus     | ES Hybrid 2017-18             | LSS               | Stock<sup>3</sup>| 0mph               | 0mph              |
-| Lexus     | ES Hybrid 2019-21             | All               | openpilot        | 0mph               | 0mph              |
-| Lexus     | IS 2017-2019                  | All               | Stock            | 22mph              | 0mph              |
-| Lexus     | NX 2018                       | All               | Stock<sup>3</sup>| 0mph               | 0mph              |
-| Lexus     | NX 2020                       | All               | openpilot        | 0mph               | 0mph              |
-| Lexus     | NX Hybrid 2018-19             | All               | Stock<sup>3</sup>| 0mph               | 0mph              |
-| Lexus     | RX 2016-18                    | All               | Stock<sup>3</sup>| 0mph               | 0mph              |
-| Lexus     | RX 2020-21                    | All               | openpilot        | 0mph               | 0mph              |
-| Lexus     | RX Hybrid 2016-19             | All               | Stock<sup>3</sup>| 0mph               | 0mph              |
-| Lexus     | RX Hybrid 2020-21             | All               | openpilot        | 0mph               | 0mph              |
-| Lexus     | UX Hybrid 2019-21             | All               | openpilot        | 0mph               | 0mph              |
-| Toyota    | Alphard 2020                  | All               | openpilot        | 0mph               | 0mph              |
-| Toyota    | Avalon 2016-21                | TSS-P             | Stock<sup>3</sup>| 20mph<sup>1</sup>  | 0mph              |
-| Toyota    | Avalon Hybrid 2019-21         | TSS-P             | Stock<sup>3</sup>| 20mph<sup>1</sup>  | 0mph              |
-| Toyota    | Camry 2018-20                 | All               | Stock            | 0mph<sup>4</sup>   | 0mph              |
-| Toyota    | Camry 2021                    | All               | openpilot        | 0mph<sup>4</sup>   | 0mph              |
-| Toyota    | Camry Hybrid 2018-20          | All               | Stock            | 0mph<sup>4</sup>   | 0mph              |
-| Toyota    | Camry Hybrid 2021             | All               | openpilot        | 0mph               | 0mph              |
-| Toyota    | C-HR 2017-20                  | All               | Stock            | 0mph               | 0mph              |
-| Toyota    | C-HR Hybrid 2017-19           | All               | Stock            | 0mph               | 0mph              |
-| Toyota    | Corolla 2017-19               | All               | Stock<sup>3</sup>| 20mph<sup>1</sup>  | 0mph              |
-| Toyota    | Corolla 2020-22               | All               | openpilot        | 0mph               | 0mph              |
-| Toyota    | Corolla Hatchback 2019-21     | All               | openpilot        | 0mph               | 0mph              |
-| Toyota    | Corolla Hybrid 2020-21        | All               | openpilot        | 0mph               | 0mph              |
-| Toyota    | Highlander 2017-19            | All               | Stock<sup>3</sup>| 0mph               | 0mph              |
-| Toyota    | Highlander 2020-21            | All               | openpilot        | 0mph               | 0mph              |
-| Toyota    | Highlander Hybrid 2017-19     | All               | Stock<sup>3</sup>| 0mph               | 0mph              |
-| Toyota    | Highlander Hybrid 2020-21     | All               | openpilot        | 0mph               | 0mph              |
-| Toyota    | Mirai 2021	                  | All               | openpilot        | 0mph               | 0mph              |
-| Toyota    | Prius 2016-20                 | TSS-P             | Stock<sup>3</sup>| 0mph               | 0mph              |
-| Toyota    | Prius 2021                    | All               | openpilot        | 0mph               | 0mph              |
-| Toyota    | Prius Prime 2017-20           | All               | Stock<sup>3</sup>| 0mph               | 0mph              |
-| Toyota    | Prius Prime 2021              | All               | openpilot        | 0mph               | 0mph              |
-| Toyota    | Rav4 2016-18                  | TSS-P             | Stock<sup>3</sup>| 20mph<sup>1</sup>  | 0mph              |
-| Toyota    | Rav4 2019-21                  | All               | openpilot        | 0mph               | 0mph              |
-| Toyota    | Rav4 Hybrid 2016-18           | TSS-P             | Stock<sup>3</sup>| 0mph               | 0mph              |
-| Toyota    | Rav4 Hybrid 2019-21           | All               | openpilot        | 0mph               | 0mph              |
-| Toyota    | Sienna 2018-20                | All               | Stock<sup>3</sup>| 0mph               | 0mph              |
+تم تطوير برنامج القائد الآلي بواسطة [كوما](https://comma.ai/) ومن قبل مستخدمين مثلك. نرحب بكل من طلبات الحل والإصلاح [جت هب](http://github.com/commaai/openpilot). يتم تشجيع إصلاحات الأخطاء ومنافذ السيارات الجديدة. التحديث [المستندات المساهمة](docs/CONTRIBUTING.md).
 
-<sup>1</sup>[Comma Pedal](https://github.com/commaai/openpilot/wiki/comma-pedal) is used to provide stop-and-go capability to some of the openpilot-supported cars that don't currently support stop-and-go. ***NOTE: The Comma Pedal is not officially supported by [comma](https://comma.ai).*** <br />
-<sup>2</sup>2019 Honda Civic 1.6L Diesel Sedan does not have ALC below 12mph. <br />
-<sup>3</sup>When disconnecting the Driver Support Unit (DSU), openpilot ACC will replace stock ACC. ***NOTE: disconnecting the DSU disables Automatic Emergency Braking (AEB).*** <br />
-<sup>4</sup>28mph for Camry 4CYL L, 4CYL LE and 4CYL SE which don't have Full-Speed Range Dynamic Radar Cruise Control. <br />
+يمكن العثور على الوثائق المتعلقة بتطوير القائد الآلي على [docs.comma.ai](https://docs.comma.ai). معلومات حول تشغيل برنامج القائد الآلي (e.g. FAQ, fingerprinting, troubleshooting, custom forks, community hardware) يجل أن تكون على [ويكي](https://github.com/commaai/openpilot/wiki).
 
-Community Maintained Cars and Features
+يمكنك إضافة دعم لسيارتك باتباع الإرشادات التي كتبنا عنها [ماركة](https://blog.comma.ai/how-to-write-a-car-port-for-openpilot/) and [الموديل](https://blog.comma.ai/openpilot-port-guide-for-toyota-models/) المنافذ. بشكل عام ، تعتبر السيارة المزودة بنظام تثبيت السرعة التكيفي ونظام المساعدة في الحفاظ على المسار مرشحًا جيدًا. [انضم إلى الديسكورد](https://discord.comma.ai) لمناقشة منافذ السيارات: معظم ماركات السيارات لديها قناة مخصصة.
+
+تريد الحصول على أجر للعمل على القائد الآلي [كوما تقوم بالتوظيف](https://comma.ai/jobs/).
+
+و [تابعنا على تويتر](https://twitter.com/comma_ai).
+
+بينانات المسخدم وحساب كوما
 ------
 
-| Make      | Model (US Market Reference)   | Supported Package | ACC              | No ACC accel below | No ALC below |
-| ----------| ------------------------------| ------------------| -----------------| -------------------| -------------|
-| Audi      | A3 2014-19                    | Prestige          | Stock            | 0mph               | 0mph         |
-| Audi      | A3 Sportback e-tron 2017-18   | Prestige          | Stock            | 0mph               | 0mph         |
-| Audi      | Q2 2018                       | Driver Assistance | Stock            | 0mph               | 0mph         |
-| Buick     | Regal 2018<sup>1</sup>        | Adaptive Cruise   | openpilot        | 0mph               | 7mph         |
-| Cadillac  | ATS 2018<sup>1</sup>          | Adaptive Cruise   | openpilot        | 0mph               | 7mph         |
-| Chevrolet | Malibu 2017<sup>1</sup>       | Adaptive Cruise   | openpilot        | 0mph               | 7mph         |
-| Chevrolet | Volt 2017-18<sup>1</sup>      | Adaptive Cruise   | openpilot        | 0mph               | 7mph         |
-| Chrysler  | Pacifica 2017-18              | Adaptive Cruise   | Stock            | 0mph               | 9mph         |
-| Chrysler  | Pacifica 2020                 | Adaptive Cruise   | Stock            | 0mph               | 39mph        |
-| Chrysler  | Pacifica Hybrid 2017-18       | Adaptive Cruise   | Stock            | 0mph               | 9mph         |
-| Chrysler  | Pacifica Hybrid 2019-21       | Adaptive Cruise   | Stock            | 0mph               | 39mph        |
-| Genesis   | G70 2018                      | All               | Stock            | 0mph               | 0mph         |
-| Genesis   | G80 2018                      | All               | Stock            | 0mph               | 0mph         |
-| Genesis   | G90 2018                      | All               | Stock            | 0mph               | 0mph         |
-| GMC       | Acadia 2018<sup>1</sup>       | Adaptive Cruise   | openpilot        | 0mph               | 7mph         |
-| Holden    | Astra 2017<sup>1</sup>        | Adaptive Cruise   | openpilot        | 0mph               | 7mph         |
-| Hyundai   | Elantra 2017-19               | SCC + LKAS        | Stock            | 19mph              | 34mph        |
-| Hyundai   | Elantra 2021                  | SCC + LKAS        | Stock            | 0mph               | 0mph         |
-| Hyundai   | Elantra Hybrid 2021           | SCC + LKAS        | Stock            | 0mph               | 0mph         |
-| Hyundai   | Genesis 2015-16               | SCC + LKAS        | Stock            | 19mph              | 37mph        |
-| Hyundai   | Ioniq Electric 2019           | SCC + LKAS        | Stock            | 0mph               | 32mph        |
-| Hyundai   | Ioniq Electric 2020           | SCC + LKAS        | Stock            | 0mph               | 0mph         |
-| Hyundai   | Ioniq PHEV 2020               | SCC + LKAS        | Stock            | 0mph               | 0mph         |
-| Hyundai   | Kona 2020                     | SCC + LKAS        | Stock            | 0mph               | 0mph         |
-| Hyundai   | Kona EV 2018-19               | SCC + LKAS        | Stock            | 0mph               | 0mph         |
-| Hyundai   | Kona Hybrid 2020              | SCC + LKAS        | Stock            | 0mph               | 0mph         |
-| Hyundai   | Santa Fe 2019-20              | All               | Stock            | 0mph               | 0mph         |
-| Hyundai   | Sonata 2018-2019              | SCC + LKAS        | Stock            | 0mph               | 0mph         |
-| Hyundai   | Sonata Hybrid 2021            | All               | Stock            | 0mph               | 0mph         |
-| Hyundai   | Veloster 2019-20              | SCC + LKAS        | Stock            | 5mph               | 0mph         |
-| Jeep      | Grand Cherokee 2016-18        | Adaptive Cruise   | Stock            | 0mph               | 9mph         |
-| Jeep      | Grand Cherokee 2019-20        | Adaptive Cruise   | Stock            | 0mph               | 39mph        |
-| Kia       | Forte 2018-21                 | SCC + LKAS        | Stock            | 0mph               | 0mph         |
-| Kia       | Niro EV 2019-21               | SCC + LKAS        | Stock            | 0mph               | 0mph         |
-| Kia       | Niro Hybrid 2021              | SCC + LKAS        | Stock            | 0mph               | 0mph         |
-| Kia       | Niro PHEV 2019                | SCC + LKAS        | Stock            | 10mph              | 32mph        |
-| Kia       | Optima 2017                   | SCC + LKAS        | Stock            | 0mph               | 32mph        |
-| Kia       | Optima 2019                   | SCC + LKAS        | Stock            | 0mph               | 0mph         |
-| Kia       | Seltos 2021                   | SCC + LKAS        | Stock            | 0mph               | 0mph         |
-| Kia       | Sorento 2018-19               | SCC + LKAS        | Stock            | 0mph               | 0mph         |
-| Kia       | Stinger 2018                  | SCC + LKAS        | Stock            | 0mph               | 0mph         |
-| Kia       | Ceed 2019                     | SCC + LKAS        | Stock            | 0mph               | 0mph         |
-| Kia       | Telluride 2020                | SCC + LKAS        | Stock            | 0mph               | 0mph         |
-| Nissan    | Altima 2019-20                | ProPILOT          | Stock            | 0mph               | 0mph         |
-| Nissan    | Leaf 2018-20                  | ProPILOT          | Stock            | 0mph               | 0mph         |
-| Nissan    | Rogue 2018-20                 | ProPILOT          | Stock            | 0mph               | 0mph         |
-| Nissan    | X-Trail 2017                  | ProPILOT          | Stock            | 0mph               | 0mph         |
-| SEAT      | Ateca 2018                    | Driver Assistance | Stock            | 0mph               | 0mph         |
-| SEAT      | Leon 2014-2020                | Driver Assistance | Stock            | 0mph               | 0mph         |
-| Škoda     | Kodiaq 2018-19                | Driver Assistance | Stock            | 0mph               | 0mph         |
-| Škoda     | Octavia 2015, 2018-19         | Driver Assistance | Stock            | 0mph               | 0mph         |
-| Škoda     | Octavia RS 2016               | Driver Assistance | Stock            | 0mph               | 0mph         |
-| Škoda     | Scala 2020                    | Driver Assistance | Stock            | 0mph               | 0mph         |
-| Škoda     | Superb 2015-18                | Driver Assistance | Stock            | 0mph               | 0mph         |
-| Subaru    | Ascent 2019                   | EyeSight          | Stock            | 0mph               | 0mph         |
-| Subaru    | Crosstrek 2018-19             | EyeSight          | Stock            | 0mph               | 0mph         |
-| Subaru    | Forester 2019-21              | EyeSight          | Stock            | 0mph               | 0mph         |
-| Subaru    | Impreza 2017-19               | EyeSight          | Stock            | 0mph               | 0mph         |
-| Volkswagen| Atlas 2018-19                 | Driver Assistance | Stock            | 0mph               | 0mph         |
-| Volkswagen| e-Golf 2014, 2019-20          | Driver Assistance | Stock            | 0mph               | 0mph         |
-| Volkswagen| Golf 2015-20                  | Driver Assistance | Stock            | 0mph               | 0mph         |
-| Volkswagen| Golf Alltrack 2017-18         | Driver Assistance | Stock            | 0mph               | 0mph         |
-| Volkswagen| Golf GTE 2016                 | Driver Assistance | Stock            | 0mph               | 0mph         |
-| Volkswagen| Golf GTI 2018-20              | Driver Assistance | Stock            | 0mph               | 0mph         |
-| Volkswagen| Golf R 2016-19                | Driver Assistance | Stock            | 0mph               | 0mph         |
-| Volkswagen| Golf SportsVan 2016           | Driver Assistance | Stock            | 0mph               | 0mph         |
-| Volkswagen| Golf SportWagen 2015          | Driver Assistance | Stock            | 0mph               | 0mph         |
-| Volkswagen| Jetta 2018-20                 | Driver Assistance | Stock            | 0mph               | 0mph         |
-| Volkswagen| Jetta GLI 2021                | Driver Assistance | Stock            | 0mph               | 0mph         |
-| Volkswagen| Passat 2016-17<sup>2</sup>    | Driver Assistance | Stock            | 0mph               | 0mph         |
-| Volkswagen| T-Cross 2021                  | Driver Assistance | Stock            | 0mph               | 0mph         |
-| Volkswagen| Tiguan 2020                   | Driver Assistance | Stock            | 0mph               | 0mph         |
-| Volkswagen| Touran 2017                   | Driver Assistance | Stock            | 0mph               | 0mph         |
+بشكل افتراضي ، يقوم برنامج القائد الآلي بتحميل بيانات القيادة إلى خوادمنا. يمكنك أيضًا الوصول إلى بياناتك من خلال [اتصال كوما](https://connect.comma.ai/). نستخدم بياناتك لتدريب نماذج أفضل وتحسين القائد الآلي للجميع.
 
-<sup>1</sup>Requires an [OBD-II car harness](https://comma.ai/shop/products/comma-car-harness) and [community built ASCM harness](https://github.com/commaai/openpilot/wiki/GM#hardware). ***NOTE: disconnecting the ASCM disables Automatic Emergency Braking (AEB).*** <br />
-<sup>2</sup>Only includes the MQB Passat sold outside of North America. The NMS Passat made in Chattanooga TN is not yet supported.
+القائد اللآلي هو برنامج مفتوح المصدر: للمستخدم حرية تعطيل جمع البيانات إذا كان يرغب في ذلك.
 
-Community Maintained Cars and Features are not verified by comma to meet our [safety model](SAFETY.md). Be extra cautious using them. They are only available after enabling the toggle in `Settings->Developer->Enable Community Features`.
+يسجل برنامج القائد الآلي الكاميرات المواجهة للطريق و الكان و نظام تحديد المواقع العالمي و تشمل تحديد الاتجاه ومقياس المغناطيسية وأجهزة الاستشعار الحرارية والأعطال وسجلات نظام التشغيل.
+يتم تسجيل الكاميرا المواجهة للسائق فقط إذا قمت صراحة بالاشتراك في الإعدادات. لم يتم تسجيل الميكروفون.
 
-To promote a car from community maintained, it must meet a few requirements. We must own one from the brand, we must sell the harness for it, has full ISO26262 in both panda and openpilot, there must be a path forward for longitudinal control, it must have AEB still enabled, and it must support fingerprinting 2.0
+باستخدام برنامج القائد الآلي ، فإنك توافق على [سياسة الخصوصية الخاصة بنا](https://comma.ai/privacy). أنت تدرك أن استخدام هذا البرنامج أو الخدمات المرتبطة به سيؤدي إلى إنشاء أنواع معينة من بيانات المستخدم ، والتي قد يتم تسجيلها وتخزينها وفقًا لتقدير كوما وحدها. بقبول هذه الاتفاقية, أنت تمنح حقًا عالميًا غير قابل للإلغاء ودائم لفاصلة لاستخدام هذه البيانات.
 
-Although they're not upstream, the community has openpilot running on other makes and models. See the 'Community Supported Models' section of each make [on our wiki](https://wiki.comma.ai/).
-
-Installation Instructions
-------
-
-Install openpilot on a supported device by entering ``https://openpilot.comma.ai`` during the installer setup.
-
-Follow these [video instructions](https://youtu.be/lcjqxCymins) to properly mount the device on the windshield. Note: openpilot features an automatic pose calibration routine and openpilot performance should not be affected by small pitch and yaw misalignments caused by imprecise device mounting.
-
-Before placing the device on your windshield, check the state and local laws and ordinances where you drive. Some state laws prohibit or restrict the placement of objects on the windshield of a motor vehicle.
-
-You will be able to engage openpilot after reviewing the onboarding screens and finishing the calibration procedure.
-
-Limitations of openpilot ALC and LDW
-------
-
-openpilot ALC and openpilot LDW do not automatically drive the vehicle or reduce the amount of attention that must be paid to operate your vehicle. The driver must always keep control of the steering wheel and be ready to correct the openpilot ALC action at all times.
-
-While changing lanes, openpilot is not capable of looking next to you or checking your blind spot. Only nudge the wheel to initiate a lane change after you have confirmed it's safe to do so.
-
-Many factors can impact the performance of openpilot ALC and openpilot LDW, causing them to be unable to function as intended. These include, but are not limited to:
-
-* Poor visibility (heavy rain, snow, fog, etc.) or weather conditions that may interfere with sensor operation.
-* The road facing camera is obstructed, covered or damaged by mud, ice, snow, etc.
-* Obstruction caused by applying excessive paint or adhesive products (such as wraps, stickers, rubber coating, etc.) onto the vehicle.
-* The device is mounted incorrectly.
-* When in sharp curves, like on-off ramps, intersections etc...; openpilot is designed to be limited in the amount of steering torque it can produce.
-* In the presence of restricted lanes or construction zones.
-* When driving on highly banked roads or in presence of strong cross-wind.
-* Extremely hot or cold temperatures.
-* Bright light (due to oncoming headlights, direct sunlight, etc.).
-* Driving on hills, narrow, or winding roads.
-
-The list above does not represent an exhaustive list of situations that may interfere with proper operation of openpilot components. It is the driver's responsibility to be in control of the vehicle at all times.
-
-Limitations of openpilot ACC and FCW
-------
-
-openpilot ACC and openpilot FCW are not systems that allow careless or inattentive driving. It is still necessary for the driver to pay close attention to the vehicle’s surroundings and to be ready to re-take control of the gas and the brake at all times.
-
-Many factors can impact the performance of openpilot ACC and openpilot FCW, causing them to be unable to function as intended. These include, but are not limited to:
-
-* Poor visibility (heavy rain, snow, fog, etc.) or weather conditions that may interfere with sensor operation.
-* The road facing camera or radar are obstructed, covered, or damaged by mud, ice, snow, etc.
-* Obstruction caused by applying excessive paint or adhesive products (such as wraps, stickers, rubber coating, etc.) onto the vehicle.
-* The device is mounted incorrectly.
-* Approaching a toll booth, a bridge or a large metal plate.
-* When driving on roads with pedestrians, cyclists, etc...
-* In presence of traffic signs or stop lights, which are not detected by openpilot at this time.
-* When the posted speed limit is below the user selected set speed. openpilot does not detect speed limits at this time.
-* In presence of vehicles in the same lane that are not moving.
-* When abrupt braking maneuvers are required. openpilot is designed to be limited in the amount of deceleration and acceleration that it can produce.
-* When surrounding vehicles perform close cut-ins from neighbor lanes.
-* Driving on hills, narrow, or winding roads.
-* Extremely hot or cold temperatures.
-* Bright light (due to oncoming headlights, direct sunlight, etc.).
-* Interference from other equipment that generates radar waves.
-
-The list above does not represent an exhaustive list of situations that may interfere with proper operation of openpilot components. It is the driver's responsibility to be in control of the vehicle at all times.
-
-Limitations of openpilot DM
-------
-
-openpilot DM should not be considered an exact measurement of the alertness of the driver.
-
-Many factors can impact the performance of openpilot DM, causing it to be unable to function as intended. These include, but are not limited to:
-
-* Low light conditions, such as driving at night or in dark tunnels.
-* Bright light (due to oncoming headlights, direct sunlight, etc.).
-* The driver's face is partially or completely outside field of view of the driver facing camera.
-* The driver facing camera is obstructed, covered, or damaged.
-
-The list above does not represent an exhaustive list of situations that may interfere with proper operation of openpilot components. A driver should not rely on openpilot DM to assess their level of attention.
-
-User Data and comma Account
-------
-
-By default, openpilot uploads the driving data to our servers. You can also access your data by pairing with the comma connect app ([iOS](https://apps.apple.com/us/app/comma-connect/id1456551889), [Android](https://play.google.com/store/apps/details?id=ai.comma.connect&hl=en_US)). We use your data to train better models and improve openpilot for everyone.
-
-openpilot is open source software: the user is free to disable data collection if they wish to do so.
-
-openpilot logs the road facing camera, CAN, GPS, IMU, magnetometer, thermal sensors, crashes, and operating system logs.
-The driver facing camera is only logged if you explicitly opt-in in settings. The microphone is not recorded.
-
-By using openpilot, you agree to [our Privacy Policy](https://connect.comma.ai/privacy). You understand that use of this software or its related services will generate certain types of user data, which may be logged and stored at the sole discretion of comma. By accepting this agreement, you grant an irrevocable, perpetual, worldwide right to comma for the use of this data.
-
-Safety and Testing
+السلامة والاختبار
 ----
 
-* openpilot observes ISO26262 guidelines, see [SAFETY.md](SAFETY.md) for more details.
-* openpilot has software in the loop [tests](.github/workflows/selfdrive_tests.yaml) that run on every commit.
-* The safety model code lives in panda and is written in C, see [code rigor](https://github.com/commaai/panda#code-rigor) for more details.
-* panda has software in the loop [safety tests](https://github.com/commaai/panda/tree/master/tests/safety).
-* Internally, we have a hardware in the loop Jenkins test suite that builds and unit tests the various processes.
-* panda has additional hardware in the loop [tests](https://github.com/commaai/panda/blob/master/Jenkinsfile).
-* We run the latest openpilot in a testing closet containing 10 comma devices continuously replaying routes.
+* القائد الآلي يراعي إرشادات ISO26262 ، انظر [السلامة](docs/SAFETY.md) لمزيد من التفاصيل.
+* يحتوي برنامج القائد الآلي على برنامج في عقدة [الاختبارات](.github/workflows/selfdrive_tests.yaml) التي تعمل على كل التزام.
+* الكود الذي يفرض تطبيق نموذج الأمان يعيش في الباندا ومكتوب بلغة C ، انظر [دقة كود](https://github.com/commaai/panda#code-rigor) لمزيد من التفاصيل.
+* الباندا لديه برنامج في عقدة [اختبارات السلامة](https://github.com/commaai/panda/tree/master/tests/safety).
+* داخليًا ، لدينا جهاز في مجموعة اختبار عقدة مسمترة الذي يبني العمليات المختلفة ويختبرها.
+* الباندا لديها أجهزة إضافية في العقدة [الاختبارات](https://github.com/commaai/panda/blob/master/Jenkinsfile).
+* نقوم بتشغيل أحدث برنامج القائد الآلي في خزانة اختبار تحتوي على 10 أجهزة كوما تعيد تشغيل المسارات باستمرار.
 
-Testing on PC
-------
-For simplified development and experimentation, openpilot can be run in the CARLA driving simulator, which allows you to develop openpilot without a car. The whole setup should only take a few minutes.
-
-Steps:
-1) Start the CARLA server on first terminal
-```
-bash -c "$(curl https://raw.githubusercontent.com/commaai/openpilot/master/tools/sim/start_carla.sh)"
-```
-2) Start openpilot on second terminal
-```
-bash -c "$(curl https://raw.githubusercontent.com/commaai/openpilot/master/tools/sim/start_openpilot_docker.sh)"
-```
-3) Press 1 to engage openpilot
-
-See the full [README](tools/sim/README.md)
-
-You should also take a look at the tools directory in master: lots of tools you can use to replay driving data, test, and develop openpilot from your PC.
-
-
-Community and Contributing
-------
-
-openpilot is developed by [comma](https://comma.ai/) and by users like you. We welcome both pull requests and issues on [GitHub](http://github.com/commaai/openpilot). Bug fixes and new car ports are encouraged.
-
-You can add support for your car by following guides we have written for [Brand](https://blog.comma.ai/how-to-write-a-car-port-for-openpilot/) and [Model](https://blog.comma.ai/openpilot-port-guide-for-toyota-models/) ports. Generally, a car with adaptive cruise control and lane keep assist is a good candidate. [Join our Discord](https://discord.comma.ai) to discuss car ports: most car makes have a dedicated channel.
-
-Want to get paid to work on openpilot? [comma is hiring](https://comma.ai/jobs/).
-
-And [follow us on Twitter](https://twitter.com/comma_ai).
-
-Directory Structure
+بنية الدليل
 ------
     .
-    ├── cereal              # The messaging spec and libs used for all logs
-    ├── common              # Library like functionality we've developed here
-    ├── installer/updater   # Manages updates of NEOS
-    ├── opendbc             # Files showing how to interpret data from cars
-    ├── panda               # Code used to communicate on CAN
-    ├── phonelibs           # External libraries
-    ├── pyextra             # Extra python packages not shipped in NEOS
-    └── selfdrive           # Code needed to drive the car
-        ├── assets          # Fonts, images, and sounds for UI
-        ├── athena          # Allows communication with the app
-        ├── boardd          # Daemon to talk to the board
-        ├── camerad         # Driver to capture images from the camera sensors
-        ├── car             # Car specific code to read states and control actuators
-        ├── common          # Shared C/C++ code for the daemons
-        ├── controls        # Planning and controls
-        ├── debug           # Tools to help you debug and do car ports
-        ├── locationd       # Precise localization and vehicle parameter estimation
-        ├── logcatd         # Android logcat as a service
-        ├── loggerd         # Logger and uploader of car data
-        ├── modeld          # Driving and monitoring model runners
-        ├── proclogd        # Logs information from proc
-        ├── sensord         # IMU interface code
-        ├── test            # Unit tests, system tests, and a car simulator
-        └── ui              # The UI
+    ├── cereal              # مواصفات الرسائل و الطبقات المستخدمة في جميع الخوارزميات
+    ├── common              # مكتبة مثل الوظائف التي قمنا بتطويرها هنا
+    ├── docs                # التوثيق
+    ├── opendbc             # ملفات توضح كيفية تفسير البيانات من السيارات
+    ├── panda               # رمز يستخدم للتواصل على الكان
+    ├── third_party         # مكتبات خارجية
+    ├── pyextra             # حزم بايثون الإضافية
+    └── selfdrive           # الأكواد المطلوبة لقيادة السيارة
+        ├── assets          # الخطوط, الصور, و الأصوات للواجهة
+        ├── athena          # يسمح بالتواصل مع التطبيق
+        ├── boardd          # الديمون الذي يسمح للاتصال مع البورد
+        ├── camerad         # يسمح لالتقاط الصور من مستشعرات الكاميرا
+        ├── car             # رمز السيارة المحدد لقراءة الحالات والتحكم في المشغلات
+        ├── common          # كود C / C ++ مشترك الدومين
+        ├── controls        # التخطيط والضوابط
+        ├── debug           # أدوات لمساعدتك على التصحيح والقيام بمنافذ السيارة
+        ├── locationd       # توطين دقيق وتقدير معايرة السيارة
+        ├── logcatd         # ملفات الأندرويد والخدمات
+        ├── loggerd         # مسجل وتحميل بيانات السيارة
+        ├── modeld          # نظام مراقبة القيادة أثناء العمل
+        ├── proclogd        # معلومات السجلات من proc
+        ├── sensord         # رمز واجهة تحديد الاتجاه
+        ├── test            # اختبارات الوحدة واختبارات النظام وجهاز محاكاة السيارة
+        └── ui              # واجهة المستخدم
 
-Licensing
+الترخيص
 ------
 
-openpilot is released under the MIT license. Some parts of the software are released under other licenses as specified.
+تم إصدار القائد الآلي بموجب ترخيص MIT. تم إصدار بعض أجزاء البرنامج بموجب تراخيص أخرى كما هو محدد.
+يجب على أي مستخدم لهذا البرنامج تعويض كوما للذكاء الاصطناهي. ومديريها ومسؤوليها وموظفيها ووكلائها وحاملي الأسهم والشركات التابعة لها والمقاولين من الباطن والعملاء وضد جميع الادعاءات والمطالبات والإجراءات والدعاوى والمطالب والأضرار والمسؤوليات. والالتزامات والخسائر والتسويات والأحكام والتكاليف والنفقات (بما في ذلك على سبيل المثال لا الحصر أتعاب المحاماة والتكاليف) التي تنشأ عن أو تتعلق أو تنتج عن أي استخدام لهذا البرنامج من قبل المستخدم.
 
-Any user of this software shall indemnify and hold harmless comma.ai, Inc. and its directors, officers, employees, agents, stockholders, affiliates, subcontractors and customers from and against all allegations, claims, actions, suits, demands, damages, liabilities, obligations, losses, settlements, judgments, costs and expenses (including without limitation attorneys’ fees and costs) which arise out of, relate to or result from any use of this software by user.
-
-**THIS IS ALPHA QUALITY SOFTWARE FOR RESEARCH PURPOSES ONLY. THIS IS NOT A PRODUCT.
-YOU ARE RESPONSIBLE FOR COMPLYING WITH LOCAL LAWS AND REGULATIONS.
-NO WARRANTY EXPRESSED OR IMPLIED.**
+**هذا هو برنامج ألفا عالي الجودة لأغراض البحث فقط. هذا ليس منتج.
+أنت مسؤول عن الامتثال للقوانين واللوائح المحلية.
+لا صراحة أو ضمنا الضمان.**
 
 ---
 

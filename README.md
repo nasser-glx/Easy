@@ -35,7 +35,7 @@ https://github.com/xx979xx/openpilot
     <td><a href="https://youtu.be/Asq9IBZ5EL8" title="Video By Greer Viau"><img src="https://i.imgur.com/1aVz6fu.png"></a></td>
     <td><a href="https://youtu.be/YfMKV0BCS3E" title="Video By Logan LeGrand"><img src="https://i.imgur.com/U2kBp1r.jpg"></a></td>
     <td><a href="https://youtu.be/fE3jcvNPKuU" title="Video By Charlie Kim"><img src="https://i.imgur.com/PInrzIG.jpg"></a></td>
-    <td><a href="https://youtu.be/-IkImTe1NYE" title="Video By Aragon"><img src="https://i.imgur.com/04VNzPf.jpg"></a></td>
+    <td><a href="https://youtu.be/CVj5Vxcrl8c" title="Video By Aragon"><img src="https://i.imgur.com/l6ercNX.jpg"></a></td>
   </tr>
   <tr>
     <td><a href="https://youtu.be/iIUICQkdwFQ" title="Video By Logan LeGrand"><img src="https://i.imgur.com/b1LHQTy.jpg"></a></td>
@@ -44,7 +44,7 @@ https://github.com/xx979xx/openpilot
     <td><a href="https://youtu.be/BQ0tF3MTyyc" title="Video By Tsai-Fi"><img src="https://i.imgur.com/eZzelq3.jpg"></a></td>
   </tr>
 </table>
-
+ 
 عمله على السيارة
 ------
 

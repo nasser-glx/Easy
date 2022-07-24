@@ -148,7 +148,7 @@ class NoEntryAlert(Alert):
   def __init__(self, alert_text_2, audible_alert=AudibleAlert.chimeError, duration_sound=.4,
                visual_alert=VisualAlert.none, duration_hud_alert=2.):
     #super().__init__("openpilot Unavailable", alert_text_2, AlertStatus.normal,
-    super().__init__("오픈파일럿 사용불가", alert_text_2, AlertStatus.normal,
+    super().__init__("أوبن بايلوت غير متوفر", alert_text_2, AlertStatus.normal,
                      AlertSize.mid, Priority.LOW, visual_alert,
                      audible_alert, duration_sound, duration_hud_alert, 3.)
 
@@ -156,7 +156,7 @@ class NoEntryAlert(Alert):
 class SoftDisableAlert(Alert):
   def __init__(self, alert_text_2):
     #super().__init__("TAKE CONTROL IMMEDIATELY", alert_text_2,
-    super().__init__("핸들을 즉시 잡아주세요", alert_text_2,
+    super().__init__("قم بالتحكم على الفور", alert_text_2,
                      AlertStatus.critical, AlertSize.full,
                      Priority.MID, VisualAlert.steerRequired,
                      AudibleAlert.chimeWarningRepeat, .1, 2., 2.),
@@ -164,7 +164,7 @@ class SoftDisableAlert(Alert):
 
 class ImmediateDisableAlert(Alert):
   #def __init__(self, alert_text_2, alert_text_1="TAKE CONTROL IMMEDIATELY"):
-  def __init__(self, alert_text_2, alert_text_1="핸들을 즉시 잡아주세요"):
+  def __init__(self, alert_text_2, alert_text_1="قم بالتحكم على الفور"):
     super().__init__(alert_text_1, alert_text_2,
                      AlertStatus.critical, AlertSize.full,
                      Priority.HIGHEST, VisualAlert.steerRequired,
@@ -189,24 +189,24 @@ class NormalPermanentAlert(Alert):
 # ********** alert callback functions **********
 def below_steer_speed_alert(CP: car.CarParams, sm: messaging.SubMaster, metric: bool) -> Alert:
   speed = int(round(CP.minSteerSpeed * (CV.MS_TO_KPH if metric else CV.MS_TO_MPH)))
-  unit = "㎞/h" if metric else "mph"
+  unit = "كلم/س" if metric else "ميل"
   return Alert(
     #"TAKE CONTROL",
     #"Steer Unavailable Below %d %s" % (speed, unit),
-    "핸들을 잡아주세요",
-    "%d %s 이상의 속도에서 조향제어가능합니다" % (speed, unit),
+    "أمسك المقود",
+    "%d %s يمكن التحكم في التوجيه بسرعات أعلى" % (speed, unit),
     AlertStatus.userPrompt, AlertSize.mid,
     Priority.MID, VisualAlert.steerRequired, AudibleAlert.none, 0., 0.4, .3)
 
 
 def calibration_incomplete_alert(CP: car.CarParams, sm: messaging.SubMaster, metric: bool) -> Alert:
   speed = int(MIN_SPEED_FILTER * (CV.MS_TO_KPH if metric else CV.MS_TO_MPH))
-  unit = "㎞/h" if metric else "mph"
+  unit = "كلم/س" if metric else "ميل"
   return Alert(
     #"Calibration in Progress: %d%%" % sm['liveCalibration'].calPerc,
     #"Drive Above %d %s" % (speed, unit),
-    "캘리브레이션 진행중입니다 : %d%%" % sm['liveCalibration'].calPerc,
-    "속도를 %d %s 이상으로 주행하세요" % (speed, unit),
+    "المعايرة قيد التقدم : %d%%" % sm['liveCalibration'].calPerc,
+    "اسرع %d %s بالسيارة" % (speed, unit),
     AlertStatus.normal, AlertSize.mid,
     Priority.LOWEST, VisualAlert.none, AudibleAlert.none, 0., 0., .2)
 
@@ -216,18 +216,18 @@ def no_gps_alert(CP: car.CarParams, sm: messaging.SubMaster, metric: bool) -> Al
   return Alert(
     #"Poor GPS reception",
     #"If sky is visible, contact support" if gps_integrated else "Check GPS antenna placement",
-    "GPS 수신불량",
-    "GPS 연결상태 및 안테나를 점검하세요" if gps_integrated else "GPS 안테나를 점검하세요",
+    "استقبال ضعيف لنظام تحديد المواقع العالمي (GPS)",
+    "تحقق من اتصال GPS والهوائي" if gps_integrated else "تحقق من هوائي GPS",
     AlertStatus.normal, AlertSize.mid,
     Priority.LOWER, VisualAlert.none, AudibleAlert.none, 0., 0., .2, creation_delay=300.)
 
 
 def wrong_car_mode_alert(CP: car.CarParams, sm: messaging.SubMaster, metric: bool) -> Alert:
   #text = "Cruise Mode Disabled"
-  text = "크루즈 비활성상태"
+  text = "تم تعطيل مثبت السرعة"
   if CP.carName == "honda":
     #text = "Main Switch Off"
-    text = "메인 스위치 OFF"
+    text = "مفتاح إيقاف التشغيل الرئيسي"
   return NoEntryAlert(text, duration_hud_alert=0.)
 
 
@@ -235,8 +235,8 @@ def startup_fuzzy_fingerprint_alert(CP: car.CarParams, sm: messaging.SubMaster, 
   return Alert(
     #"WARNING: No Exact Match on Car Model",
     #f"Closest Match: {CP.carFingerprint.title()[:40]}",
-    "경고: 정확히 일치하는 차량모델이 없습니다",
-    f"가장 근접한 결과: {CP.carFingerprint.title()[:40]}",
+    "تحذير: لم يتم العثور على طراز السيارة المطابق تمامًا",
+    f"أقرب نتيجة: {CP.carFingerprint.title()[:40]}",
     AlertStatus.userPrompt, AlertSize.mid,
     Priority.LOWER, VisualAlert.none, AudibleAlert.none, 0., 0., 10.)
 
@@ -246,7 +246,7 @@ def joystick_alert(CP: car.CarParams, sm: messaging.SubMaster, metric: bool) -> 
   gb, steer = list(axes)[:2] if len(axes) else (0., 0.)
   return Alert(
     #"Joystick Mode",
-    "조이스틱 모드",
+    "وضع التحكم بيد الألعاب",
     f"Gas: {round(gb * 100.)}%, Steer: {round(steer * 100.)}%",
     AlertStatus.normal, AlertSize.mid,
     Priority.LOW, VisualAlert.none, AudibleAlert.none, 0., 0., .1)
@@ -254,8 +254,8 @@ def joystick_alert(CP: car.CarParams, sm: messaging.SubMaster, metric: bool) -> 
 def auto_lane_change_alert(CP, sm, metric):
   alc_timer = sm['lateralPlan'].autoLaneChangeTimer
   return Alert(
-    "자동차선변경이 %d초 뒤에 시작됩니다" % alc_timer,
-    "차선의 차량을 확인하세요",
+    "تغيير السيارة %dيبدأ في ثوان" % alc_timer,
+    "افحص السيارة في المسار",
     AlertStatus.normal, AlertSize.mid,
     Priority.LOW, VisualAlert.none, AudibleAlert.chimeDingRepeat, .1, .1, .1, alert_rate=0.75)
 
@@ -270,7 +270,7 @@ EVENTS: Dict[int, Dict[str, Union[Alert, Callable[[Any, messaging.SubMaster, boo
     ET.WARNING: joystick_alert,
     ET.PERMANENT: Alert(
       #"Joystick Mode",
-      "조이스틱 모드",
+      "وضع التحكم بيد الألعاب",
       "",
       AlertStatus.normal, AlertSize.small,
       Priority.LOWER, VisualAlert.none, AudibleAlert.none, 0., 0., 0.1),
@@ -278,15 +278,15 @@ EVENTS: Dict[int, Dict[str, Union[Alert, Callable[[Any, messaging.SubMaster, boo
 
   EventName.controlsInitializing: {
     #ET.NO_ENTRY: NoEntryAlert("Controls Initializing"),
-    ET.NO_ENTRY: NoEntryAlert("프로세스 초기화중입니다"),
+    ET.NO_ENTRY: NoEntryAlert("العملية قيد التهيئة"),
   },
 
   EventName.startup: {
     ET.PERMANENT: Alert(
       #"Be ready to take over at any time",
       #"Always keep hands on wheel and eyes on road",
-      "오픈파일럿 사용준비 완료",
-      "항상 핸들을 잡고 도로를 주시하세요",
+      "كن مستعدًا لتولي القيادة في أي وقت",
+      "امسك عجلة القيادة دائمًا وراقب الطريق",
       AlertStatus.normal, AlertSize.mid,
       Priority.LOWER, VisualAlert.none, AudibleAlert.chimeReady, 1., 0., 10.),
   },
@@ -295,8 +295,8 @@ EVENTS: Dict[int, Dict[str, Union[Alert, Callable[[Any, messaging.SubMaster, boo
     ET.PERMANENT: Alert(
       #"WARNING: This branch is not tested",
       #"Always keep hands on wheel and eyes on road",
-      "오픈파일럿 사용준비 완료",
-      "항상 핸들을 잡고 도로를 주시하세요",
+      "تحذير: لم يتم اختبار هذا الفرع",
+      "امسك عجلة القيادة دائمًا وراقب الطريق",
       AlertStatus.normal, AlertSize.mid,
       Priority.LOWER, VisualAlert.none, AudibleAlert.chimeReady, 1., 0., 10.),
   },
@@ -306,8 +306,8 @@ EVENTS: Dict[int, Dict[str, Union[Alert, Callable[[Any, messaging.SubMaster, boo
     ET.PERMANENT: Alert(
       #"Dashcam mode",
       #"Always keep hands on wheel and eyes on road",
-      "대시캠 모드",
-      "항상 핸들을 잡고 도로를 주시하세요",
+      "وضع كاميرا المراقبة",
+      "امسك عجلة القيادة دائمًا وراقب الطريق",
       AlertStatus.normal, AlertSize.mid,
       Priority.LOWER, VisualAlert.none, AudibleAlert.none, 1., 0., 10.),
   },
@@ -317,8 +317,8 @@ EVENTS: Dict[int, Dict[str, Union[Alert, Callable[[Any, messaging.SubMaster, boo
     ET.PERMANENT: Alert(
       #"Dashcam mode for unsupported car",
       #"Always keep hands on wheel and eyes on road",
-      "대시캠 모드 : 호환되지않는 차량",
-      "항상 핸들을 잡고 도로를 주시하세요",
+      "وضع كاميرا المراقبة : المركبة غير متوافقة",
+      "امسك عجلة القيادة دائمًا وراقب الطريق",
       AlertStatus.normal, AlertSize.mid,
       Priority.LOWER, VisualAlert.none, AudibleAlert.none, 1., 0., 10.),
   },
@@ -339,8 +339,8 @@ EVENTS: Dict[int, Dict[str, Union[Alert, Callable[[Any, messaging.SubMaster, boo
     ET.PERMANENT: Alert(
       #"Car Unrecognized",
       #"Check All Connections",
-      "차량이 인식되지않습니다",
-      "연결상태를 확인하세요",
+      "لم يتم التعرف على السيارة",
+      "تحقق من حالة الاتصال",
       AlertStatus.userPrompt, AlertSize.mid,
       Priority.LOWER, VisualAlert.none, AudibleAlert.none, 0., 0., 10.),
   },
@@ -348,7 +348,7 @@ EVENTS: Dict[int, Dict[str, Union[Alert, Callable[[Any, messaging.SubMaster, boo
   EventName.dashcamMode: {
     ET.PERMANENT: Alert(
       #"Dashcam Mode",
-      "대시캠 모드",
+      "وضع كاميرا المراقبة",
       "",
       AlertStatus.normal, AlertSize.small,
       Priority.LOWEST, VisualAlert.none, AudibleAlert.none, 0., 0., .2),
@@ -358,8 +358,8 @@ EVENTS: Dict[int, Dict[str, Union[Alert, Callable[[Any, messaging.SubMaster, boo
     ET.PERMANENT: Alert(
       #"Stock LKAS is turned on",
       #"Turn off stock LKAS to engage",
-      "차량 LKAS 버튼 상태확인",
-      "차량 LKAS 버튼 OFF후 활성화됩니다",
+      "تم تشغيل Stock LKAS",
+      "يتم تنشيطه بعد إيقاف تشغيل زر LKAS في السيارة",
       AlertStatus.normal, AlertSize.mid,
       Priority.LOWER, VisualAlert.none, AudibleAlert.none, 0., 0., .2),
   },
@@ -372,8 +372,8 @@ EVENTS: Dict[int, Dict[str, Union[Alert, Callable[[Any, messaging.SubMaster, boo
     ET.PERMANENT: Alert(
       #"openpilot Not Available",
       #"Enable Community Features in Settings to Engage",
-      "커뮤니티 기능 감지됨",
-      "개발자설정에서 커뮤니티 기능을 활성화해주세요",
+      "أوبن بايلوت غير متوفر",
+      "قم بتمكين ميزات المجتمع في الإعدادات للمشاركة",
       AlertStatus.normal, AlertSize.mid,
       Priority.LOW, VisualAlert.none, AudibleAlert.none, 0., 0., .2),
   },
@@ -385,8 +385,8 @@ EVENTS: Dict[int, Dict[str, Union[Alert, Callable[[Any, messaging.SubMaster, boo
     ET.PERMANENT: Alert(
       #"Dashcam Mode",
       #"Car Unrecognized",
-      "대시캠 모드",
-      "차량인식 불가",
+      "وضع كاميرا المراقبة",
+      "لم يتم التعرف على المركبة",
       AlertStatus.normal, AlertSize.mid,
       Priority.LOWEST, VisualAlert.none, AudibleAlert.none, 0., 0., .2),
   },
@@ -395,20 +395,20 @@ EVENTS: Dict[int, Dict[str, Union[Alert, Callable[[Any, messaging.SubMaster, boo
     ET.PERMANENT: Alert(
       #"BRAKE!",
       #"Stock AEB: Risk of Collision",
-      "브레이크!",
-      "추돌 위험",
+      "الفرامل!",
+      "فرملة الطوارئ : خطر الاصطدام",
       AlertStatus.critical, AlertSize.full,
       Priority.HIGHEST, VisualAlert.fcw, AudibleAlert.none, 1., 2., 2.),
     #ET.NO_ENTRY: NoEntryAlert("Stock AEB: Risk of Collision"),
-    ET.NO_ENTRY: NoEntryAlert("AEB: 추돌위험"),
+    ET.NO_ENTRY: NoEntryAlert("AEB: خطر الاصطدام"),
   },
 
   EventName.fcw: {
     ET.PERMANENT: Alert(
       #"BRAKE!",
       #"Risk of Collision",
-      "브레이크!",
-      "추돌 위험",
+      "الفرامل!",
+      "فرملة الطوارئ : خطر الاصطدام",
       AlertStatus.critical, AlertSize.full,
       Priority.HIGHEST, VisualAlert.fcw, AudibleAlert.chimeWarningRepeat, 1., 2., 2.),
   },
@@ -417,8 +417,8 @@ EVENTS: Dict[int, Dict[str, Union[Alert, Callable[[Any, messaging.SubMaster, boo
     ET.PERMANENT: Alert(
       #"TAKE CONTROL",
       #"Lane Departure Detected",
-      "핸들을 잡아주세요",
-      "차선이탈 감지됨",
+      "قم بالتحكم على الفور",
+      "تم الكشف عن مغادرة الحارة المرورية",
       AlertStatus.userPrompt, AlertSize.mid,
       Priority.LOW, VisualAlert.ldw, AudibleAlert.chimeDing, .1, 2., 3.),
   },
@@ -428,7 +428,7 @@ EVENTS: Dict[int, Dict[str, Union[Alert, Callable[[Any, messaging.SubMaster, boo
   EventName.gasPressed: {
     ET.PRE_ENABLE: Alert(
       #"openpilot will not brake while gas pressed",
-      "가속패달감지시 오픈파일럿은 브레이크를 사용하지않습니다",
+      "لن يقوم برنامج أوبن بايلوت  بالفرملة أثناء الضغط على دواسة الوقود",
       "",
       AlertStatus.normal, AlertSize.small,
       Priority.LOWEST, VisualAlert.none, AudibleAlert.none, .0, .0, .1, creation_delay=1.),
@@ -445,11 +445,11 @@ EVENTS: Dict[int, Dict[str, Union[Alert, Callable[[Any, messaging.SubMaster, boo
   EventName.vehicleModelInvalid: {
     #ET.NO_ENTRY: NoEntryAlert("Vehicle Parameter Identification Failed"),
     #ET.SOFT_DISABLE: SoftDisableAlert("Vehicle Parameter Identification Failed"),
-    ET.NO_ENTRY: NoEntryAlert("차량 매개변수 식별 오류"),
-    ET.SOFT_DISABLE: SoftDisableAlert("차량 매개변수 식별 오류"),
+    ET.NO_ENTRY: NoEntryAlert("خطأ في تحديد نوع السيارة"),
+    ET.SOFT_DISABLE: SoftDisableAlert("خطأ في تحديد نوع السيارة"),
     ET.WARNING: Alert(
       #"Vehicle Parameter Identification Failed",
-      "차량 매개변수 식별 오류",
+      "خطأ في تحديد نوع السيارة",
       "",
       AlertStatus.normal, AlertSize.small,
       Priority.LOWEST, VisualAlert.steerRequired, AudibleAlert.none, .0, .0, .1),
@@ -458,7 +458,7 @@ EVENTS: Dict[int, Dict[str, Union[Alert, Callable[[Any, messaging.SubMaster, boo
   EventName.steerTempUnavailableSilent: {
     ET.WARNING: Alert(
       #"Steering Temporarily Unavailable",
-      "조향제어 일시적으로 사용불가",
+      "التحكم في التوجيه غير متاح مؤقتًا",
       "",
       AlertStatus.userPrompt, AlertSize.small,
       Priority.LOW, VisualAlert.steerRequired, AudibleAlert.chimePrompt, 1., 1., 1.),
@@ -467,7 +467,7 @@ EVENTS: Dict[int, Dict[str, Union[Alert, Callable[[Any, messaging.SubMaster, boo
   EventName.preDriverDistracted: {
     ET.WARNING: Alert(
       #"KEEP EYES ON ROAD: Driver Distracted",
-      "도로를 주시하세요 : 운전자 도로주시 불안",
+      "إبقاء العينين على الطريق: السائق مشتت",
       "",
       AlertStatus.normal, AlertSize.small,
       Priority.LOW, VisualAlert.none, AudibleAlert.chimeDing, .1, .1, .1),
@@ -477,8 +477,8 @@ EVENTS: Dict[int, Dict[str, Union[Alert, Callable[[Any, messaging.SubMaster, boo
     ET.WARNING: Alert(
       #"KEEP EYES ON ROAD",
       #"Driver Distracted",
-      "도로를 주시하세요",
-      "운전자 도로주시 불안",
+      "ابق عينيك على الطريق",
+      "السائق مشتت",
       AlertStatus.userPrompt, AlertSize.mid,
       Priority.MID, VisualAlert.steerRequired, AudibleAlert.chimeDing, .1, .1, .1),
   },
@@ -487,8 +487,8 @@ EVENTS: Dict[int, Dict[str, Union[Alert, Callable[[Any, messaging.SubMaster, boo
     ET.WARNING: Alert(
       #"DISENGAGE IMMEDIATELY",
       #"Driver Distracted",
-      "조향제어가 해제됩니다",
-      "운전자 도로주시 불안",
+      "افصل على الفور",
+      "السائق مشتت",
       AlertStatus.critical, AlertSize.full,
       Priority.HIGH, VisualAlert.steerRequired, AudibleAlert.chimeWarningRepeat, .1, .1, .1),
   },
@@ -496,7 +496,7 @@ EVENTS: Dict[int, Dict[str, Union[Alert, Callable[[Any, messaging.SubMaster, boo
   EventName.preDriverUnresponsive: {
     ET.WARNING: Alert(
       #"TOUCH STEERING WHEEL: No Face Detected",
-      "핸들을 잡아주세요 : 운전자 인식 불가",
+      "المس عجلة القيادة : لم يتم اكتشاف أي وجه",
       "",
       AlertStatus.normal, AlertSize.small,
       Priority.LOW, VisualAlert.steerRequired, AudibleAlert.chimeDing, .1, .1, .1, alert_rate=0.75),
@@ -506,8 +506,8 @@ EVENTS: Dict[int, Dict[str, Union[Alert, Callable[[Any, messaging.SubMaster, boo
     ET.WARNING: Alert(
       #"TOUCH STEERING WHEEL",
       #"Driver Unresponsive",
-      "핸들을 잡아주세요",
-      "운전자 응답하지않음",
+      "المس عجلة القيادة",
+      "السائق لا يستجيب",
       AlertStatus.userPrompt, AlertSize.mid,
       Priority.MID, VisualAlert.steerRequired, AudibleAlert.chimeWarning2Repeat, .1, .1, .1),
   },
@@ -516,8 +516,8 @@ EVENTS: Dict[int, Dict[str, Union[Alert, Callable[[Any, messaging.SubMaster, boo
     ET.WARNING: Alert(
       #"DISENGAGE IMMEDIATELY",
       #"Driver Unresponsive",
-      "조향제어가 해제됩니다",
-      "운전자 응답하지않음",
+      "افصل على الفور",
+      "السائق لا يستجيب",
       AlertStatus.critical, AlertSize.full,
       Priority.HIGH, VisualAlert.steerRequired, AudibleAlert.chimeWarningRepeat, .1, .1, .1),
   },
@@ -526,8 +526,8 @@ EVENTS: Dict[int, Dict[str, Union[Alert, Callable[[Any, messaging.SubMaster, boo
     ET.WARNING: Alert(
       #"TAKE CONTROL",
       #"Resume Driving Manually",
-      "핸들을 잡아주세요",
-      "수동으로 재활성하세요",
+      "امسك عجلة القيادة",
+      "استئناف القيادة يدويًا",
       AlertStatus.userPrompt, AlertSize.mid,
       Priority.LOW, VisualAlert.none, AudibleAlert.none, 0., 0., .2),
   },
@@ -536,8 +536,8 @@ EVENTS: Dict[int, Dict[str, Union[Alert, Callable[[Any, messaging.SubMaster, boo
     ET.WARNING: Alert(
       #"STOPPED",
       #"Press Resume to Move",
-      "앞차량 멈춤",
-      "이동하려면 RES버튼을 누르세요",
+      "توقفت",
+      "اضغط على استئناف للتحرك",
       AlertStatus.userPrompt, AlertSize.mid,
       Priority.LOW, VisualAlert.none, AudibleAlert.none, 0., 0., .2),
   },
@@ -550,7 +550,7 @@ EVENTS: Dict[int, Dict[str, Union[Alert, Callable[[Any, messaging.SubMaster, boo
     ET.WARNING: Alert(
       #"Steer Left to Start Lane Change Once Safe",
       #"",
-      "좌측차선으로 차선을 변경합니다",
+      "توجه يسارًا لبدء تغيير المسار بمجرد أن يصبح آمنًا",
       "",
       AlertStatus.normal, AlertSize.mid,
       Priority.LOW, VisualAlert.none, AudibleAlert.none, .0, .1, .1, alert_rate=0.75),
@@ -560,7 +560,7 @@ EVENTS: Dict[int, Dict[str, Union[Alert, Callable[[Any, messaging.SubMaster, boo
     ET.WARNING: Alert(
       #"Steer Right to Start Lane Change Once Safe",
       #"",
-      "우측차선으로 차선을 변경합니다",
+      "اتجه يمينًا لبدء تغيير المسار بمجرد أن يصبح آمنًا",
       "",
       AlertStatus.normal, AlertSize.mid,
       Priority.LOW, VisualAlert.none, AudibleAlert.none, .0, .1, .1, alert_rate=0.75),
@@ -570,7 +570,7 @@ EVENTS: Dict[int, Dict[str, Union[Alert, Callable[[Any, messaging.SubMaster, boo
     ET.WARNING: Alert(
       #"Car Detected in Blindspot",
       #"",
-      "차선에 차량이 감지되니 대기하세요",
+      "تم اكتشاف السيارة في النقطة العمياء",
       "",
       AlertStatus.userPrompt, AlertSize.mid,
       Priority.LOW, VisualAlert.none, AudibleAlert.chimeDingRepeat, .1, .1, .1),
@@ -580,7 +580,7 @@ EVENTS: Dict[int, Dict[str, Union[Alert, Callable[[Any, messaging.SubMaster, boo
     ET.WARNING: Alert(
       #"Changing Lanes",
       #"",
-      "차선을 변경합니다",
+      "تغيير المسارات",
       "",
       AlertStatus.normal, AlertSize.mid,
       Priority.LOW, VisualAlert.none, AudibleAlert.none, .0, .1, .1),
@@ -590,8 +590,8 @@ EVENTS: Dict[int, Dict[str, Union[Alert, Callable[[Any, messaging.SubMaster, boo
     ET.WARNING: Alert(
       #"TAKE CONTROL",
       #"Turn Exceeds Steering Limit",
-      "핸들을 잡아주세요",
-      "조향제어 제한을 초과함",
+      "قم بالتحكم",
+      "يتخطى المنعطف حد التوجيه",
       AlertStatus.userPrompt, AlertSize.mid,
       Priority.LOW, VisualAlert.steerRequired, AudibleAlert.chimePrompt, 1., 1., 1.),
   },
@@ -599,19 +599,19 @@ EVENTS: Dict[int, Dict[str, Union[Alert, Callable[[Any, messaging.SubMaster, boo
   # Thrown when the fan is driven at >50% but is not rotating
   EventName.fanMalfunction: {
     #ET.PERMANENT: NormalPermanentAlert("Fan Malfunction", "Contact Support"),
-    ET.PERMANENT: NormalPermanentAlert("FAN 오작동", "장치를 점검하세요"),
+    ET.PERMANENT: NormalPermanentAlert("عطل في المروحة", "تحقق من جهازك"),
   },
 
   # Camera is not outputting frames at a constant framerate
   EventName.cameraMalfunction: {
     #ET.PERMANENT: NormalPermanentAlert("Camera Malfunction", "Contact Support"),
-    ET.PERMANENT: NormalPermanentAlert("카메라 오작동", "장치를 점검하세요"),
+    ET.PERMANENT: NormalPermanentAlert("عطل في الكاميرا", "اتصل بالدعم"),
   },
 
   # Unused
   EventName.gpsMalfunction: {
     #ET.PERMANENT: NormalPermanentAlert("GPS Malfunction", "Contact Support"),
-    ET.PERMANENT: NormalPermanentAlert("GPS 오작동", "장치를 점검하세요"),
+    ET.PERMANENT: NormalPermanentAlert("عطل في نظام تحديد المواقع العالمي (GPS)", "اتصل بالدعم"),
   },
 
   # When the GPS position and localizer diverge the localizer is reset to the
@@ -619,12 +619,12 @@ EVENTS: Dict[int, Dict[str, Union[Alert, Callable[[Any, messaging.SubMaster, boo
   # more often than expected.
   EventName.localizerMalfunction: {
     #ET.PERMANENT: NormalPermanentAlert("Sensor Malfunction", "Contact Support"),
-    ET.PERMANENT: NormalPermanentAlert("센서 오작동", "장치를 점검하세요"),
+    ET.PERMANENT: NormalPermanentAlert("عطل في جهاز الاستشعار", "اتصل بالدعم"),
   },
 
   EventName.turningIndicatorOn: {
     ET.WARNING: Alert(
-      "방향지시등 동작중에는 핸들을 잡아주세요",
+      "يرجى الضغط على عجلة القيادة أثناء تشغيل ضوء إشارة الانعطاف",
       "",
       AlertStatus.userPrompt, AlertSize.mid,
       Priority.MID, VisualAlert.none, AudibleAlert.none, .0, .1, .2),
@@ -632,7 +632,7 @@ EVENTS: Dict[int, Dict[str, Union[Alert, Callable[[Any, messaging.SubMaster, boo
 
   EventName.lkasButtonOff: {
     ET.WARNING: Alert(
-      "차량의 LKAS버튼을 확인해주세요",
+      "يرجى التحقق من زر LKAS على السيارة",
       "",
       AlertStatus.userPrompt, AlertSize.mid,
       Priority.HIGH, VisualAlert.steerRequired, AudibleAlert.none, 0., .1, .2),
@@ -663,19 +663,19 @@ EVENTS: Dict[int, Dict[str, Union[Alert, Callable[[Any, messaging.SubMaster, boo
   EventName.brakeHold: {
     ET.USER_DISABLE: EngagementAlert(AudibleAlert.chimeDisengage),
     #ET.NO_ENTRY: NoEntryAlert("Brake Hold Active"),
-    ET.NO_ENTRY: NoEntryAlert("브레이크 감지됨"),
+    ET.NO_ENTRY: NoEntryAlert("تثبيت الفرامل نشط"),
   },
 
   EventName.parkBrake: {
     ET.USER_DISABLE: EngagementAlert(AudibleAlert.chimeDisengage),
     #ET.NO_ENTRY: NoEntryAlert("Park Brake Engaged"),
-    ET.NO_ENTRY: NoEntryAlert("주차 브레이크를 해제하세요"),
+    ET.NO_ENTRY: NoEntryAlert("تفعيل الجلنط الكخربائي"),
   },
 
   EventName.pedalPressed: {
     ET.USER_DISABLE: EngagementAlert(AudibleAlert.chimeDisengage),
     #ET.NO_ENTRY: NoEntryAlert("Pedal Pressed During Attempt",
-    ET.NO_ENTRY: NoEntryAlert("브레이크 감지됨",
+    ET.NO_ENTRY: NoEntryAlert("الكشف عن الفرامل",
                               visual_alert=VisualAlert.brakePressed),
   },
 
@@ -687,48 +687,48 @@ EVENTS: Dict[int, Dict[str, Union[Alert, Callable[[Any, messaging.SubMaster, boo
   EventName.wrongCruiseMode: {
     ET.USER_DISABLE: EngagementAlert(AudibleAlert.chimeDisengage),
     #ET.NO_ENTRY: NoEntryAlert("Enable Adaptive Cruise"),
-    ET.NO_ENTRY: NoEntryAlert("어뎁티브크루즈를 활성화하세요"),
+    ET.NO_ENTRY: NoEntryAlert("تفعيل مثبت السرعة الذكي"),
   },
 
   EventName.steerTempUnavailable: {
     #ET.SOFT_DISABLE: SoftDisableAlert("Steering Temporarily Unavailable"),
     #ET.NO_ENTRY: NoEntryAlert("Steering Temporarily Unavailable",
     ET.WARNING: Alert(
-      "핸들을 잡아주세요",
-      "조향제어 일시적으로 사용불가",
+      "امسك عجلة القيادة",
+      "التحكم في التوجيه غير متاح مؤقتًا",
       AlertStatus.userPrompt, AlertSize.mid,
       Priority.LOW, VisualAlert.steerRequired, AudibleAlert.none, 0., 0., .2),
-    ET.NO_ENTRY: NoEntryAlert("조향제어 일시적으로 사용불가",
+    ET.NO_ENTRY: NoEntryAlert("التحكم في التوجيه غير متاح مؤقتًا",
                               duration_hud_alert=0.),
   },
 
   EventName.outOfSpace: {
     ET.PERMANENT: Alert(
       #"Out of Storage",
-      "저장공간 부족",
+      "الذاكرة ممتلئة",
       "",
       AlertStatus.normal, AlertSize.small,
       Priority.LOWER, VisualAlert.none, AudibleAlert.none, 0., 0., .2),
     #ET.NO_ENTRY: NoEntryAlert("Out of Storage Space",
-    ET.NO_ENTRY: NoEntryAlert("저장공간 부족",
+    ET.NO_ENTRY: NoEntryAlert("نفاد مساحة التخزين",
                               duration_hud_alert=0.),
   },
 
   EventName.belowEngageSpeed: {
     #ET.NO_ENTRY: NoEntryAlert("Speed Too Low"),
-    ET.NO_ENTRY: NoEntryAlert("속도를 높여주세요"),
+    ET.NO_ENTRY: NoEntryAlert("السرعة منخفضة للغاية"),
   },
 
   EventName.sensorDataInvalid: {
     ET.PERMANENT: Alert(
       #"No Data from Device Sensors",
       #"Reboot your Device",
-      "장치 센서 오류",
-      "장치를 점검하세요",
+      "لا توجد بيانات من أجهزة استشعار الجهاز",
+      "أعد تشغيل الجهاز",
       AlertStatus.normal, AlertSize.mid,
       Priority.LOWER, VisualAlert.none, AudibleAlert.none, 0., 0., .2, creation_delay=1.),
     #ET.NO_ENTRY: NoEntryAlert("No Data from Device Sensors"),
-    ET.NO_ENTRY: NoEntryAlert("장치 센서 오류"),
+    ET.NO_ENTRY: NoEntryAlert("لا توجد بيانات من أجهزة استشعار الجهاز"),
   },
 
   EventName.noGps: {
@@ -738,13 +738,13 @@ EVENTS: Dict[int, Dict[str, Union[Alert, Callable[[Any, messaging.SubMaster, boo
   EventName.soundsUnavailable: {
     #ET.PERMANENT: NormalPermanentAlert("Speaker not found", "Reboot your Device"),
     #ET.NO_ENTRY: NoEntryAlert("Speaker not found"),
-    ET.PERMANENT: NormalPermanentAlert("스피커가 감지되지않습니다", "장치를 점검하세요"),
-    ET.NO_ENTRY: NoEntryAlert("스피커가 감지되지않습니다"),
+    ET.PERMANENT: NormalPermanentAlert("مكبر الصوت غير موجود", "أعد تشغيل الجهاز"),
+    ET.NO_ENTRY: NoEntryAlert("مكبر الصوت غير موجود"),
   },
 
   EventName.tooDistracted: {
     #ET.NO_ENTRY: NoEntryAlert("Distraction Level Too High"),
-    ET.NO_ENTRY: NoEntryAlert("방해 수준이 너무높습니다"),
+    ET.NO_ENTRY: NoEntryAlert("مستوى الإلهاء مرتفع جدًا"),
   },
 
   EventName.overheat: {
@@ -756,15 +756,15 @@ EVENTS: Dict[int, Dict[str, Union[Alert, Callable[[Any, messaging.SubMaster, boo
       Priority.LOWER, VisualAlert.none, AudibleAlert.none, 0., 0., .2),
     #ET.SOFT_DISABLE: SoftDisableAlert("System Overheated"),
     #ET.NO_ENTRY: NoEntryAlert("System Overheated"),
-    ET.SOFT_DISABLE: SoftDisableAlert("장치 과열됨"),
-    ET.NO_ENTRY: NoEntryAlert("장치 과열됨"),
+    ET.SOFT_DISABLE: SoftDisableAlert("النظام ساخن"),
+    ET.NO_ENTRY: NoEntryAlert("النظام ساخن"),
   },
 
   EventName.wrongGear: {
     #ET.SOFT_DISABLE: SoftDisableAlert("Gear not D"),
     #ET.NO_ENTRY: NoEntryAlert("Gear not D"),
     ET.USER_DISABLE: EngagementAlert(AudibleAlert.chimeDisengage),
-    ET.NO_ENTRY: NoEntryAlert("기어를 [D]로 변경하세요",
+    ET.NO_ENTRY: NoEntryAlert("تغيير الترس إلى [D]",
                               audible_alert=AudibleAlert.chimeGeard, duration_sound=3.),
   },
 
@@ -777,56 +777,56 @@ EVENTS: Dict[int, Dict[str, Union[Alert, Callable[[Any, messaging.SubMaster, boo
     #ET.PERMANENT: NormalPermanentAlert("Calibration Invalid", "Remount Device and Recalibrate"),
     #ET.SOFT_DISABLE: SoftDisableAlert("Calibration Invalid: Remount Device & Recalibrate"),
     #ET.NO_ENTRY: NoEntryAlert("Calibration Invalid: Remount Device & Recalibrate"),
-    ET.PERMANENT: NormalPermanentAlert("캘리브레이션 오류", "장치 위치변경후 캘리브레이션을 다시하세요"),
-    ET.SOFT_DISABLE: SoftDisableAlert("캘리브레이션 오류 : 장치 위치변경후 캘리브레이션을 다시하세요"),
-    ET.NO_ENTRY: NoEntryAlert("캘리브레이션 오류 : 장치 위치변경후 캘리브레이션을 다시하세요"),
+    ET.PERMANENT: NormalPermanentAlert("خطأ في المعايرة "،" أعد المعايرة بعد تغيير موقع الجهاز."),
+    ET.SOFT_DISABLE: SoftDisableAlert("خطأ في المعايرة: أعد المعايرة بعد تغيير موقع الجهاز"),
+    ET.NO_ENTRY: NoEntryAlert("خطأ في المعايرة: أعد المعايرة بعد تغيير موقع الجهاز"),
   },
 
   EventName.calibrationIncomplete: {
     ET.PERMANENT: calibration_incomplete_alert,
     #ET.SOFT_DISABLE: SoftDisableAlert("Calibration in Progress"),
     #ET.NO_ENTRY: NoEntryAlert("Calibration in Progress"),
-    ET.SOFT_DISABLE: SoftDisableAlert("캘리브레이션 진행중입니다"),
-    ET.NO_ENTRY: NoEntryAlert("캘리브레이션 진행중입니다"),
+    ET.SOFT_DISABLE: SoftDisableAlert("المعايرة قيد التقدم"),
+    ET.NO_ENTRY: NoEntryAlert("المعايرة قيد التقدم"),
   },
 
   EventName.doorOpen: {
     #ET.SOFT_DISABLE: SoftDisableAlert("Door Open"),
     #ET.NO_ENTRY: NoEntryAlert("Door Open"),
     ET.PERMANENT: Alert(
-      "도어 열림",
+      "الباب مفتوح",
       "",
       AlertStatus.normal, AlertSize.full,
       Priority.LOWEST, VisualAlert.none, AudibleAlert.none, 0., 0., .2, creation_delay=0.5),
     ET.USER_DISABLE: EngagementAlert(AudibleAlert.chimeDisengage),
-    ET.NO_ENTRY: NoEntryAlert("도어 열림"),
+    ET.NO_ENTRY: NoEntryAlert("الباب مفتوح"),
   },
 
   EventName.seatbeltNotLatched: {
     #ET.SOFT_DISABLE: SoftDisableAlert("Seatbelt Unlatched"),
     #ET.NO_ENTRY: NoEntryAlert("Seatbelt Unlatched"),
     ET.PERMANENT: Alert(
-      "안전벨트 미착용",
+      "عدم ربط حزام الأمان",
       "",
       AlertStatus.normal, AlertSize.full,
       Priority.LOWEST, VisualAlert.none, AudibleAlert.none, 0., 0., .2, creation_delay=0.5),
-    ET.SOFT_DISABLE: SoftDisableAlert("안전벨트를 착용해주세요"),
-    ET.NO_ENTRY: NoEntryAlert("안전벨트를 착용해주세요",
+    ET.SOFT_DISABLE: SoftDisableAlert("الرجاء ربط حزام الأمان الخاص بك"),
+    ET.NO_ENTRY: NoEntryAlert("الرجاء ربط حزام الأمان الخاص بك",
                               audible_alert=AudibleAlert.chimeSeatbelt, duration_sound=3.),
   },
 
   EventName.espDisabled: {
     #ET.SOFT_DISABLE: SoftDisableAlert("ESP Off"),
     #ET.NO_ENTRY: NoEntryAlert("ESP Off"),
-    ET.SOFT_DISABLE: SoftDisableAlert("ESP 꺼짐"),
-    ET.NO_ENTRY: NoEntryAlert("ESP 꺼짐"),
+    ET.SOFT_DISABLE: SoftDisableAlert("إيقاف ESP"),
+    ET.NO_ENTRY: NoEntryAlert("إيقاف ESP"),
   },
 
   EventName.lowBattery: {
     #ET.SOFT_DISABLE: SoftDisableAlert("Low Battery"),
     #ET.NO_ENTRY: NoEntryAlert("Low Battery"),
-    ET.SOFT_DISABLE: SoftDisableAlert("배터리 부족"),
-    ET.NO_ENTRY: NoEntryAlert("배터리 부족"),
+    ET.SOFT_DISABLE: SoftDisableAlert("البطارية ضعيفة"),
+    ET.NO_ENTRY: NoEntryAlert("البطارية ضعيفة"),
   },
 
   # Different openpilot services communicate between each other at a certain
@@ -836,23 +836,23 @@ EVENTS: Dict[int, Dict[str, Union[Alert, Callable[[Any, messaging.SubMaster, boo
   EventName.commIssue: {
     #ET.SOFT_DISABLE: SoftDisableAlert("Communication Issue between Processes"),
     #ET.NO_ENTRY: NoEntryAlert("Communication Issue between Processes",
-    ET.SOFT_DISABLE: SoftDisableAlert("장치 프로세스 동작오류"),
-    ET.NO_ENTRY: NoEntryAlert("장치 프로세스 동작오류",
+    ET.SOFT_DISABLE: SoftDisableAlert("خطأ في عملية الجهاز"),
+    ET.NO_ENTRY: NoEntryAlert("خطأ في عملية الجهاز",
                               audible_alert=AudibleAlert.chimeDisengage),
   },
 
   # Thrown when manager detects a service exited unexpectedly while driving
   EventName.processNotRunning: {
     #ET.NO_ENTRY: NoEntryAlert("System Malfunction: Reboot Your Device",
-    ET.NO_ENTRY: NoEntryAlert("시스템 오작동: 장치를 재부팅 하세요",
+    ET.NO_ENTRY: NoEntryAlert("عطل في النظام: أعد تشغيل الجهاز",
                               audible_alert=AudibleAlert.chimeDisengage),
   },
 
   EventName.radarFault: {
     #ET.SOFT_DISABLE: SoftDisableAlert("Radar Error: Restart the Car"),
     #ET.NO_ENTRY: NoEntryAlert("Radar Error: Restart the Car"),
-    ET.SOFT_DISABLE: SoftDisableAlert("레이더 오류 : 차량을 재가동하세요"),
-    ET.NO_ENTRY: NoEntryAlert("레이더 오류 : 차량을 재가동하세요"),
+    ET.SOFT_DISABLE: SoftDisableAlert("خطأ الرادار: أعد تشغيل السيارة"),
+    ET.NO_ENTRY: NoEntryAlert("خطأ الرادار: أعد تشغيل السيارة"),
   },
 
   # Every frame from the camera should be processed by the model. If modeld
@@ -861,8 +861,8 @@ EVENTS: Dict[int, Dict[str, Union[Alert, Callable[[Any, messaging.SubMaster, boo
   EventName.modeldLagging: {
     #ET.SOFT_DISABLE: SoftDisableAlert("Driving model lagging"),
     #ET.NO_ENTRY: NoEntryAlert("Driving model lagging"),
-    ET.SOFT_DISABLE: SoftDisableAlert("주행모델 지연됨"),
-    ET.NO_ENTRY: NoEntryAlert("주행모델 지연됨"),
+    ET.SOFT_DISABLE: SoftDisableAlert("نموذج القيادة تأخر"),
+    ET.NO_ENTRY: NoEntryAlert("نموذج القيادة تأخر"),
   },
 
   # Besides predicting the path, lane lines and lead car data the model also
@@ -873,8 +873,8 @@ EVENTS: Dict[int, Dict[str, Union[Alert, Callable[[Any, messaging.SubMaster, boo
   EventName.posenetInvalid: {
     #ET.SOFT_DISABLE: SoftDisableAlert("Model Output Uncertain"),
     #ET.NO_ENTRY: NoEntryAlert("Model Output Uncertain"),
-    ET.SOFT_DISABLE: SoftDisableAlert("차선인식상태가 좋지않으니 주의운전하세요"),
-    ET.NO_ENTRY: NoEntryAlert("차선인식상태가 좋지않으니 주의운전하세요"),
+    ET.SOFT_DISABLE: SoftDisableAlert("يرجى القيادة بحذر لأن حالة التعرف على الحارة ليست جيدة."),
+    ET.NO_ENTRY: NoEntryAlert("يرجى القيادة بحذر لأن حالة التعرف على الحارة ليست جيدة."),
   },
 
   # When the localizer detects an acceleration of more than 40 m/s^2 (~4G) we
@@ -882,24 +882,24 @@ EVENTS: Dict[int, Dict[str, Union[Alert, Callable[[Any, messaging.SubMaster, boo
   EventName.deviceFalling: {
     #ET.SOFT_DISABLE: SoftDisableAlert("Device Fell Off Mount"),
     #ET.NO_ENTRY: NoEntryAlert("Device Fell Off Mount"),
-    ET.SOFT_DISABLE: SoftDisableAlert("장치가 마운트에서 떨어짐"),
-    ET.NO_ENTRY: NoEntryAlert("장치가 마운트에서 떨어짐"),
+    ET.SOFT_DISABLE: SoftDisableAlert("الجهاز وقع عن القاعدة"),
+    ET.NO_ENTRY: NoEntryAlert("الجهاز وقع عن القاعدة"),
   },
 
   EventName.lowMemory: {
     #ET.SOFT_DISABLE: SoftDisableAlert("Low Memory: Reboot Your Device"),
     #ET.PERMANENT: NormalPermanentAlert("Low Memory", "Reboot your Device"),
     #ET.NO_ENTRY: NoEntryAlert("Low Memory: Reboot Your Device",
-    ET.SOFT_DISABLE: SoftDisableAlert("메모리 부족 : 장치를 재가동하세요"),
-    ET.PERMANENT: NormalPermanentAlert("메모리 부족", "장치를 재가동하세요"),
-    ET.NO_ENTRY: NoEntryAlert("메모리 부족 : 장치를 재가동하세요",
+    ET.SOFT_DISABLE: SoftDisableAlert("ذاكرة غير كافية: أعد تشغيل الجهاز"),
+    ET.PERMANENT: NormalPermanentAlert("ذاكرة غير كافية "،" الرجاء إعادة تشغيل جهازك ""),
+    ET.NO_ENTRY: NoEntryAlert("ذاكرة غير كافية: أعد تشغيل الجهاز",
                               audible_alert=AudibleAlert.chimeDisengage),
   },
 
   EventName.highCpuUsage: {
     #ET.SOFT_DISABLE: SoftDisableAlert("System Malfunction: Reboot Your Device"),
     #ET.PERMANENT: NormalPermanentAlert("System Malfunction", "Reboot your Device"),
-    ET.NO_ENTRY: NoEntryAlert("System Malfunction: Reboot Your Device",
+    ET.NO_ENTRY: NoEntryAlert("عطل في النظام: أعد تشغيل جهازك",
                               audible_alert=AudibleAlert.chimeDisengage),
   },
 
@@ -907,31 +907,31 @@ EVENTS: Dict[int, Dict[str, Union[Alert, Callable[[Any, messaging.SubMaster, boo
     #ET.IMMEDIATE_DISABLE: ImmediateDisableAlert("Cruise Faulted"),
     #ET.PERMANENT: NormalPermanentAlert("Cruise Faulted", ""),
     #ET.NO_ENTRY: NoEntryAlert("Cruise Faulted"),
-    ET.IMMEDIATE_DISABLE: ImmediateDisableAlert("크루즈 오류"),
-    ET.PERMANENT: NormalPermanentAlert("크루즈 오류", ""),
-    ET.NO_ENTRY: NoEntryAlert("크루즈 오류"),
+    ET.IMMEDIATE_DISABLE: ImmediateDisableAlert("خطأ الرحلة"),
+    ET.PERMANENT: NormalPermanentAlert("خطأ الرحلة", ""),
+    ET.NO_ENTRY: NoEntryAlert("خطأ الرحلة"),
   },
 
   EventName.controlsMismatch: {
     #ET.IMMEDIATE_DISABLE: ImmediateDisableAlert("Controls Mismatch"),
-    ET.IMMEDIATE_DISABLE: ImmediateDisableAlert("컨트롤 불일치"),
+    ET.IMMEDIATE_DISABLE: ImmediateDisableAlert("عدم تطابق التحكم"),
   },
 
   EventName.roadCameraError: {
     #ET.PERMANENT: NormalPermanentAlert("Road Camera Error", "",
-    ET.PERMANENT: NormalPermanentAlert("주행 카메라 오류", "",
+    ET.PERMANENT: NormalPermanentAlert("خطأ في كاميرا الطريق", "",
                                        duration_text=10.),
   },
 
   EventName.driverCameraError: {
     #ET.PERMANENT: NormalPermanentAlert("Driver Camera Error", "",
-    ET.PERMANENT: NormalPermanentAlert("운전자 카메라 오류", "",
+    ET.PERMANENT: NormalPermanentAlert("خطأ في كاميرا الطريق", "",
                                        duration_text=10.),
   },
 
   EventName.wideRoadCameraError: {
     #ET.PERMANENT: NormalPermanentAlert("Wide Road Camera Error", "",
-    ET.PERMANENT: NormalPermanentAlert("와이드 주행카메라 오류", "",
+    ET.PERMANENT: NormalPermanentAlert("خطأ كاميرا الطريق العريضة", "",
                                        duration_text=10.),
   },
 
@@ -941,9 +941,9 @@ EVENTS: Dict[int, Dict[str, Union[Alert, Callable[[Any, messaging.SubMaster, boo
     #ET.SOFT_DISABLE: SoftDisableAlert("USB Error: Reboot Your Device"),
     #ET.PERMANENT: NormalPermanentAlert("USB Error: Reboot Your Device", ""),
     #ET.NO_ENTRY: NoEntryAlert("USB Error: Reboot Your Device"),
-    ET.SOFT_DISABLE: SoftDisableAlert("USB 오류: 장치를 재부팅하세요"),
-    ET.PERMANENT: NormalPermanentAlert("USB 오류: 장치를 재부팅하세요", ""),
-    ET.NO_ENTRY: NoEntryAlert("USB 오류: 장치를 재부팅하세요"),
+    ET.SOFT_DISABLE: SoftDisableAlert("خطأ USB: أعد تشغيل جهازك"),
+    ET.PERMANENT: NormalPermanentAlert("خطأ USB: أعد تشغيل جهازك", ""),
+    ET.NO_ENTRY: NoEntryAlert("خطأ USB: أعد تشغيل جهازك"),
   },
 
   # This alert can be thrown for the following reasons:
@@ -952,61 +952,61 @@ EVENTS: Dict[int, Dict[str, Union[Alert, Callable[[Any, messaging.SubMaster, boo
   # If you're not writing a new car port, this is usually cause by faulty wiring
   EventName.canError: {
     #ET.IMMEDIATE_DISABLE: ImmediateDisableAlert("CAN Error: Check Connections"),
-    ET.IMMEDIATE_DISABLE: ImmediateDisableAlert("CAN 오류 : 장치를 점검하세요"),
+    ET.IMMEDIATE_DISABLE: ImmediateDisableAlert(" خطأ في الكان: تحقق من التوصيلات"),
     ET.PERMANENT: Alert(
       #"CAN Error: Check Connections",
-      "CAN 오류 : 장치를 점검하세요",
+      "خطأ في الكان: تحقق من التوصيلات",
       "",
       AlertStatus.normal, AlertSize.small,
       Priority.LOW, VisualAlert.none, AudibleAlert.none, 0., 0., .2, creation_delay=1.),
     #ET.NO_ENTRY: NoEntryAlert("CAN Error: Check Connections"),
-    ET.NO_ENTRY: NoEntryAlert("CAN 오류 : 장치를 점검하세요"),
+    ET.NO_ENTRY: NoEntryAlert("خطأ في الكان: تحقق من التوصيلات"),
   },
 
   EventName.steerUnavailable: {
     #ET.IMMEDIATE_DISABLE: ImmediateDisableAlert("LKAS Fault: Restart the Car"),
-    ET.IMMEDIATE_DISABLE: ImmediateDisableAlert("LKAS 오류 : 차량을 재가동하세요"),
+    ET.IMMEDIATE_DISABLE: ImmediateDisableAlert("خطأ LKAS: أعد تشغيل السيارة"),
     ET.PERMANENT: Alert(
       #"LKAS Fault: Restart the car to engage",
-      "LKAS 오류 : 차량을 재가동하세요",
+      "خطأ LKAS: أعد تشغيل السيارة",
       "",
       AlertStatus.normal, AlertSize.small,
       Priority.LOWER, VisualAlert.none, AudibleAlert.none, 0., 0., .2),
     #ET.NO_ENTRY: NoEntryAlert("LKAS Fault: Restart the Car"),
-    ET.NO_ENTRY: NoEntryAlert("LKAS 오류 : 차량을 재가동하세요"),
+    ET.NO_ENTRY: NoEntryAlert("خطأ LKAS: أعد تشغيل السيارة"),
   },
 
   EventName.brakeUnavailable: {
     #ET.IMMEDIATE_DISABLE: ImmediateDisableAlert("Cruise Fault: Restart the Car"),
-    ET.IMMEDIATE_DISABLE: ImmediateDisableAlert("크루즈 오류 : 차량을 재가동하세요"),
+    ET.IMMEDIATE_DISABLE: ImmediateDisableAlert("خطأ في مثبت السرعة : أعد تشغيل السيارة"),
     ET.PERMANENT: Alert(
       #"Cruise Fault: Restart the car to engage",
-      "크루즈 오류 : 차량을 재가동하세요",
+      "خطأ في مثبت السرعة : أعد تشغيل السيارة",
       "",
       AlertStatus.normal, AlertSize.small,
       Priority.LOWER, VisualAlert.none, AudibleAlert.none, 0., 0., .2),
     #ET.NO_ENTRY: NoEntryAlert("Cruise Fault: Restart the Car"),
-    ET.NO_ENTRY: NoEntryAlert("크루즈 오류 : 차량을 재가동하세요"),
+    ET.NO_ENTRY: NoEntryAlert("خطأ في مثبت السرعة : أعد تشغيل السيارة"),
   },
 
   EventName.reverseGear: {
     ET.PERMANENT: Alert(
       #"Reverse\nGear",
-      "기어 [R] 상태",
+      "حالة القير [R]",
       "",
       AlertStatus.normal, AlertSize.full,
       Priority.LOWEST, VisualAlert.none, AudibleAlert.none, 0., 0., .2, creation_delay=0.5),
     #ET.IMMEDIATE_DISABLE: ImmediateDisableAlert("Reverse Gear"),
     #ET.NO_ENTRY: NoEntryAlert("Reverse Gear"),
     ET.USER_DISABLE: EngagementAlert(AudibleAlert.chimeDisengage),
-    ET.NO_ENTRY: NoEntryAlert("기어 [R] 상태"),
+    ET.NO_ENTRY: NoEntryAlert("حالة القير [R]"),
   },
 
   # On cars that use stock ACC the car can decide to cancel ACC for various reasons.
   # When this happens we can no long control the car so the user needs to be warned immediately.
   EventName.cruiseDisabled: {
     #ET.IMMEDIATE_DISABLE: ImmediateDisableAlert("Cruise Is Off"),
-    ET.IMMEDIATE_DISABLE: ImmediateDisableAlert("크루즈 꺼짐"),
+    ET.IMMEDIATE_DISABLE: ImmediateDisableAlert("مثبت السرعة مظفئ"),
   },
 
   # For planning the trajectory Model Predictive Control (MPC) is used. This is
@@ -1015,8 +1015,8 @@ EVENTS: Dict[int, Dict[str, Union[Alert, Callable[[Any, messaging.SubMaster, boo
   EventName.plannerError: {
     #ET.IMMEDIATE_DISABLE: ImmediateDisableAlert("Planner Solution Error"),
     #ET.NO_ENTRY: NoEntryAlert("Planner Solution Error"),
-    ET.IMMEDIATE_DISABLE: ImmediateDisableAlert("플래너 솔루션 오류"),
-    ET.NO_ENTRY: NoEntryAlert("플래너 솔루션 오류"),
+    ET.IMMEDIATE_DISABLE: ImmediateDisableAlert("خطاء في مسار الرحلة"),
+    ET.NO_ENTRY: NoEntryAlert("خطاء في مسار الرحلة"),
   },
 
   # When the relay in the harness box opens the CAN bus between the LKAS camera
@@ -1027,29 +1027,29 @@ EVENTS: Dict[int, Dict[str, Union[Alert, Callable[[Any, messaging.SubMaster, boo
     #ET.IMMEDIATE_DISABLE: ImmediateDisableAlert("Harness Malfunction"),
     #ET.PERMANENT: NormalPermanentAlert("Harness Malfunction", "Check Hardware"),
     #ET.NO_ENTRY: NoEntryAlert("Harness Malfunction"),
-    ET.IMMEDIATE_DISABLE: ImmediateDisableAlert("하네스 오작동"),
-    ET.PERMANENT: NormalPermanentAlert("하네스 오작동", "장치를 점검하세요"),
-    ET.NO_ENTRY: NoEntryAlert("하네스 오작동"),
+    ET.IMMEDIATE_DISABLE: ImmediateDisableAlert("عطل في الظفيرة"),
+    ET.PERMANENT: NormalPermanentAlert("عطل في الظفيرة", "تحقق من الأجهزة"),
+    ET.NO_ENTRY: NoEntryAlert("عطل في الظفيرة"),
   },
 
   EventName.noTarget: {
     ET.IMMEDIATE_DISABLE: Alert(
       #"openpilot Canceled",
       #"No close lead car",
-      "오픈파일럿 사용불가",
-      "근접 앞차량이 없습니다",
+      "تم إلغاء الأوبن بايلوت",
+      "لا توجد سيارة في المقدمة",
       AlertStatus.normal, AlertSize.mid,
       Priority.HIGH, VisualAlert.none, AudibleAlert.chimeDisengage, .4, 2., 3.),
     #ET.NO_ENTRY: NoEntryAlert("No Close Lead Car"),
-    ET.NO_ENTRY: NoEntryAlert("근접 앞차량이 없습니다"),
+    ET.NO_ENTRY: NoEntryAlert("لا توجد سيارة في المقدمة"),
   },
 
   EventName.speedTooLow: {
     ET.IMMEDIATE_DISABLE: Alert(
       #"openpilot Canceled",
       #"Speed too low",
-      "오픈파일럿 사용불가",
-      "속도를 높이고 재가동하세요",
+      "تم إلغاء الأوبن بايلوت",
+      "السرعة منخفضة جدا",
       AlertStatus.normal, AlertSize.mid,
       Priority.HIGH, VisualAlert.none, AudibleAlert.chimeDisengage, .4, 2., 3.),
   },
@@ -1066,8 +1066,8 @@ EVENTS: Dict[int, Dict[str, Union[Alert, Callable[[Any, messaging.SubMaster, boo
     ET.NO_ENTRY: Alert(
       #"Speed Too High",
       #"Slow down to engage",
-      "속도가 너무 높습니다",
-      "속도를 줄이고 재가동하세요",
+      "السرعة عالية جدا",
+      "أخفظ السرعة للتفعيل",
       AlertStatus.normal, AlertSize.mid,
       Priority.LOW, VisualAlert.none, AudibleAlert.chimeError, .4, 2., 3.),
   },
@@ -1075,12 +1075,12 @@ EVENTS: Dict[int, Dict[str, Union[Alert, Callable[[Any, messaging.SubMaster, boo
   EventName.lowSpeedLockout: {
     ET.PERMANENT: Alert(
       #"Cruise Fault: Restart the car to engage",
-      "크루즈 오류 : 차량을 재가동하세요",
+      "خطاء في مثبت السرعة : أعد تشغيل السيارة للتفعيل",
       "",
       AlertStatus.normal, AlertSize.small,
       Priority.LOWER, VisualAlert.none, AudibleAlert.none, 0., 0., .2),
     #ET.NO_ENTRY: NoEntryAlert("Cruise Fault: Restart the Car"),
-    ET.NO_ENTRY: NoEntryAlert("크루즈 오류 : 차량을 재가동하세요"),
+    ET.NO_ENTRY: NoEntryAlert("خطاء في مثبت السرعة : أعد تشغيل السيارة"),
   },
 
 }

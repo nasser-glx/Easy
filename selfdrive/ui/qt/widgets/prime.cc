@@ -72,13 +72,13 @@ PrimeUserWidget::PrimeUserWidget(QWidget* parent) : QWidget(parent) {
   primeLayout->setMargin(0);
   primeWidget->setContentsMargins(60, 50, 60, 50);
 
-  QLabel* subscribed = new QLabel("✓ SUBSCRIBED");
+  QLabel* subscribed = new QLabel("✓ تم الاشتراك");
   subscribed->setStyleSheet("font-size: 35px; font-weight: bold; color: #86FF4E;");
   primeLayout->addWidget(subscribed, 0, Qt::AlignTop);
 
   primeLayout->addSpacing(60);
 
-  QLabel* commaPrime = new QLabel("comma prime");
+  QLabel* commaPrime = new QLabel("كوما برايم");
   commaPrime->setStyleSheet("font-size: 70px; font-weight: bold;");
   primeLayout->addWidget(commaPrime, 0, Qt::AlignTop);
 
@@ -97,7 +97,7 @@ PrimeUserWidget::PrimeUserWidget(QWidget* parent) : QWidget(parent) {
   pointsLayout->setMargin(0);
   pointsWidget->setContentsMargins(60, 50, 60, 50);
 
-  QLabel* commaPoints = new QLabel("COMMA POINTS");
+  QLabel* commaPoints = new QLabel("نقاط كوما");
   commaPoints->setStyleSheet("font-size: 35px; font-family: Inter SemiBold;");
   pointsLayout->addWidget(commaPoints, 0, Qt::AlignTop);
 
@@ -133,24 +133,24 @@ PrimeAdWidget::PrimeAdWidget(QWidget* parent) : QFrame(parent) {
   main_layout->setContentsMargins(80, 90, 80, 60);
   main_layout->setSpacing(0);
 
-  QLabel *upgrade = new QLabel("Upgrade Now");
+  QLabel *upgrade = new QLabel("قم بالاشتراك الان");
   upgrade->setStyleSheet("font-size: 70px; font-weight: bold;");
   main_layout->addWidget(upgrade, 0, Qt::AlignTop);
   main_layout->addSpacing(50);
 
-  QLabel *description = new QLabel("Become a comma prime member at connect.comma.ai");
+  QLabel *description = new QLabel("كن عضوًا رئيسيًا بكوما في connect.comma.ai");
   description->setStyleSheet("font-size: 55px; font-weight: light; color: white;");
   description->setWordWrap(true);
   main_layout->addWidget(description, 0, Qt::AlignTop);
 
   main_layout->addStretch();
 
-  QLabel *features = new QLabel("PRIME FEATURES:");
+  QLabel *features = new QLabel("ميزات كوما برايم:");
   features->setStyleSheet("font-size: 35px; font-weight: bold; color: #E5E5E5;");
   main_layout->addWidget(features, 0, Qt::AlignBottom);
   main_layout->addSpacing(30);
 
-  QVector<QString> bullets = {"Remote access", "14 days of storage", "Developer perks"};
+  QVector<QString> bullets = {"الوصول عن بعد", "14 يومًا من التخزين", "امتيازات المطور"};
   for (auto &b: bullets) {
     const QString check = "<b><font color='#465BEA'>✓</font></b> ";
     QLabel *l = new QLabel(check + b);
@@ -179,7 +179,7 @@ SetupWidget::SetupWidget(QWidget* parent) : QFrame(parent) {
   finishRegistationLayout->setContentsMargins(30, 75, 30, 45);
   finishRegistationLayout->setSpacing(0);
 
-  QLabel* registrationTitle = new QLabel("Finish Setup");
+  QLabel* registrationTitle = new QLabel("إنهاء الإعداد");
   registrationTitle->setStyleSheet("font-size: 70px; font-weight: bold; margin-left: 55px;");
   finishRegistationLayout->addWidget(registrationTitle);
 
@@ -192,7 +192,7 @@ SetupWidget::SetupWidget(QWidget* parent) : QFrame(parent) {
 
   finishRegistationLayout->addStretch();
 
-  QPushButton* finishButton = new QPushButton("Pair device");
+  QPushButton* finishButton = new QPushButton("قم الاقتران");
   finishButton->setFixedHeight(220);
   finishButton->setStyleSheet(R"(
     QPushButton {
@@ -217,7 +217,7 @@ SetupWidget::SetupWidget(QWidget* parent) : QFrame(parent) {
   QVBoxLayout* qrLayout = new QVBoxLayout(q);
   qrLayout->setContentsMargins(90, 90, 90, 90);
 
-  QLabel* qrLabel = new QLabel("Scan the QR code to pair.");
+  QLabel* qrLabel = new QLabel("امسح رمز الاستجابة السريعة للإقران.");
   qrLabel->setAlignment(Qt::AlignHCenter);
   qrLabel->setStyleSheet("font-size: 42px; font-weight: light;");
   qrLayout->addWidget(qrLabel);

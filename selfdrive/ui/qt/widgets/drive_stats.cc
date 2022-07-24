@@ -29,7 +29,7 @@ DriveStats::DriveStats(QWidget* parent) : QFrame(parent) {
     grid_layout->setContentsMargins(0, 10, 0, 10);
 
     int row = 0;
-    grid_layout->addWidget(new QLabel("〔  누적 주행기록  〕 \U00002728"), 0, 0, 1, 3, Qt::AlignCenter);
+    grid_layout->addWidget(new QLabel("〔  سجل القيادة التراكمي  〕 \U00002728"), 0, 0, 1, 3, Qt::AlignCenter);
     grid_layout->addItem(new QSpacerItem(0, 50), row++, 0, 1, 1);
     grid_layout->addWidget(new QLabel("────────────────────────────────"), row, 0, 1, 3, Qt::AlignCenter);
 
@@ -37,17 +37,17 @@ DriveStats::DriveStats(QWidget* parent) : QFrame(parent) {
     grid_layout->addWidget(labels.hours = newLabel("0", "number"), row + 1, 1, Qt::AlignCenter);
     grid_layout->addWidget(labels.distance = newLabel("0", "number"), row + 1, 2, Qt::AlignCenter);
 
-    grid_layout->addWidget(newLabel("Drives", "unit"), row + 2, 0, Qt::AlignCenter);
-    grid_layout->addWidget(newLabel("Hours ", "unit"), row + 2, 1, Qt::AlignCenter);
+    grid_layout->addWidget(newLabel("القيادة", "unit"), row + 2, 0, Qt::AlignCenter);
+    grid_layout->addWidget(newLabel("الساعات ", "unit"), row + 2, 1, Qt::AlignCenter);
     grid_layout->addWidget(labels.distance_unit = newLabel(getDistanceUnit(), "unit"), row + 2, 2, Qt::AlignCenter);
     grid_layout->addWidget(new QLabel("────────────────────────────────"), 8, 0, 1, 3, Qt::AlignCenter);
 
-    grid_layout->addWidget(new QLabel("━ crwusiz branch ━"), 9, 0, 1, 3, Qt::AlignCenter);
-    grid_layout->addWidget(new QLabel("「 Easy Driving \U0001f60b 」"), 11, 0, 1, 3, Qt::AlignCenter);
+    grid_layout->addWidget(new QLabel("━ ناصر الخالدي ━"), 9, 0, 1, 3, Qt::AlignCenter);
+    grid_layout->addWidget(new QLabel("「 قيادة ممتعة \U0001f60b 」"), 11, 0, 1, 3, Qt::AlignCenter);
     main_layout->addLayout(grid_layout);
   };
 
-  add_stats_layouts("ALL TIME", all_);
+  add_stats_layouts("جميع الأوقات", all_);
   main_layout->addStretch();
   //add_stats_layouts("PAST WEEK", week_);
 

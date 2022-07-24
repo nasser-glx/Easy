@@ -508,7 +508,7 @@ SettingsWindow::SettingsWindow(QWidget *parent) : QFrame(parent) {
     //{"Software", new SoftwarePanel(this)},
     {"معلومة", new SoftwarePanel(this)},
     //{"Community", new CommunityPanel(this)},
-    {"تواصل اجتماعي", new CommunityPanel(this)},
+    {"المجتمع", new CommunityPanel(this)},
   };
 
 #ifdef ENABLE_MAPS

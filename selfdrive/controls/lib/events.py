@@ -891,7 +891,7 @@ EVENTS: Dict[int, Dict[str, Union[Alert, Callable[[Any, messaging.SubMaster, boo
     #ET.PERMANENT: NormalPermanentAlert("Low Memory", "Reboot your Device"),
     #ET.NO_ENTRY: NoEntryAlert("Low Memory: Reboot Your Device",
     ET.SOFT_DISABLE: SoftDisableAlert("ذاكرة غير كافية: أعد تشغيل الجهاز"),
-    ET.PERMANENT: NormalPermanentAlert("ذاكرة غير كافية "," الرجاء إعادة تشغيل جهازك ""),
+    ET.PERMANENT: NormalPermanentAlert("ذاكرة غير كافية "," الرجاء إعادة تشغيل جهازك "),
     ET.NO_ENTRY: NoEntryAlert("ذاكرة غير كافية: أعد تشغيل الجهاز",
                               audible_alert=AudibleAlert.chimeDisengage),
   },

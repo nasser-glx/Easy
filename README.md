@@ -65,6 +65,46 @@ https://github.com/xx979xx/openpilot
 
 يمكنك أيضًا تشغيل القائد الآلي في المحاكاة [مع محاكي كلارا](tools/sim/README.md). هذا يسمح لبرنامج القائد الآلي بالقيادة حول سيارة افتراضية على جهاز نظام يوبينتو الخاص بك. يجب أن يستغرق الإعداد بالكامل بضع دقائق فقط ، ولكنه يتطلب وحدة معالجة رسومات جيدة.
 
+بعض المزايا المضافة
+------
+-  شعار التحميل باللغة العربية / فيديو تقديمي أثناء الإقلاع
+- عرض الرسائل, واجهة المستخدم باللغة العربية
+- عرض التفاف عجلة القيادة , عرض ضغط الإطارات
+- الفرامل, النفاط العمياء, الأوتوهولد, عرض نظام تحديد المواقع
+- عرض عنوان الآي بي / عرض نسبة شحن البطاريات
+- التحكم بعزم الدودة ( PID / INDI / LQR )
+- دعم الكاميرا متعددة الوظائف ( LKAS / LDWS / LFA )
+- التحكم الطويل ( MAD / LONG )
+- شعار NMK / مزايا متعددة / واجهة مستخدم بسيطة
+
+## مراجع لبعض الأكواد المضافة
+- https://github.com/commaai/openpilot
+- https://github.com/xx979xx/openpilo
+- https://github.com/xps-genesis/openpilot
+- https://github.com/kegman/openpilot
+- https://github.com/dragonpilot-community/dragonpilot
+- https://github.com/wirelessnet2/openpilot
+- https://github.com/sshane/openpilot
+- https://github.com/arne182/ArnePilot
+- https://github.com/neokii
+- https://github.com/openpilotusers
+- https://github.com/Circuit-Pro/openpilot
+- - -
+## مخططات للعديد من ظفائر المركبات ( هيونداي -كيا - جينسس )
+
+cable order -> https://smartstore.naver.com/hyotrade/products/5341431170
+
+[![](https://i.imgur.com/sRcmaeS.png)](#)
+[![](https://i.imgur.com/arZrs6d.png)](#)
+[![](https://i.imgur.com/uqJlVrC.jpg)](#)
+
+## فرع شيفرولية بولت
+- https://github.com/JasonJShuler/openpilot
+- https://github.com/hanabi95/openpilot
+- https://github.com/jc01rho-openpilot-BoltEV2019-KoKr
+- https://github.com/parksunkyu81
+- - -
+
 
 المجتمع والمساهمة
 ------

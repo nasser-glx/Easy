@@ -19,8 +19,8 @@ TrackWidget::TrackWidget(QWidget *parent) : QWidget(parent) {
   setFixedSize(spinner_size);
 
   // pre-compute all the track imgs. make this a gif instead?
-  QPixmap comma_img = loadPixmap("../assets/img_spinner_nasser.png", spinner_size);
-  QPixmap track_img = loadPixmap("../assets/img_nasser_track.png", spinner_size);
+  QPixmap comma_img = QPixmap("../assets/img_spinner_comma.png").scaled(spinner_size, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+  QPixmap track_img = QPixmap("../assets/img_spinner_track.png").scaled(spinner_size, Qt::KeepAspectRatio, Qt::SmoothTransformation);
 
   QTransform transform(1, 0, 0, 1, width() / 2, height() / 2);
   QPixmap pm(spinner_size);
@@ -53,7 +53,7 @@ void TrackWidget::paintEvent(QPaintEvent *event) {
 Spinner::Spinner(QWidget *parent) : QWidget(parent) {
   QGridLayout *main_layout = new QGridLayout(this);
   main_layout->setSpacing(0);
-  main_layout->setMargin(0);
+  main_layout->setMargin(200);
 
   main_layout->addWidget(new TrackWidget(this), 0, 0, Qt::AlignHCenter | Qt::AlignVCenter);
 
@@ -87,7 +87,7 @@ Spinner::Spinner(QWidget *parent) : QWidget(parent) {
     }
     QProgressBar::chunk {
       border-radius: 10px;
-      background-color: orange;
+      background-color: white;
     }
   )");
 
@@ -111,7 +111,7 @@ void Spinner::update(int n) {
 }
 
 int main(int argc, char *argv[]) {
-  initApp(argc, argv);
+  initApp();
   QApplication a(argc, argv);
   Spinner spinner;
   setMainWindow(&spinner);

@@ -1059,8 +1059,8 @@ EVENTS: Dict[int, Dict[str, Union[Alert, Callable[[Any, messaging.SubMaster, boo
     ET.WARNING: Alert(
       #"Speed Too High",
       #"Model uncertain at this speed",
-      "속도가 너무 높습니다",
-      "속도를 줄여주세요",
+      "السرعة عالية جدا",
+      "من فضلك أبطء السرعة",
       AlertStatus.userPrompt, AlertSize.mid,
       Priority.HIGH, VisualAlert.steerRequired, AudibleAlert.chimeWarning2Repeat, 2.2, 3., 4.),
     ET.NO_ENTRY: Alert(

@@ -356,17 +356,17 @@ QWidget * network_panel(QWidget * parent) {
   layout->setSpacing(20);
 
   //auto wifiBtn = new ButtonControl("WiFi Settings", "OPEN");
-  auto wifiBtn = new ButtonControl("\U0001f4f6 WiFi 설정", "열기");
+  auto wifiBtn = new ButtonControl("\U0001f4f6 WiFi تعيين", "افتح");
   QObject::connect(wifiBtn, &ButtonControl::clicked, [=]() { HardwareEon::launch_wifi(); });
   layout->addWidget(wifiBtn);
 
   //auto tetheringBtn = new ButtonControl("Tethering Settings", "OPEN");
-  auto tetheringBtn = new ButtonControl("\U0001f4f6 테더링 설정", "열기");
+  auto tetheringBtn = new ButtonControl("\U0001f4f6 إعدادات الربط", "افتح");
   QObject::connect(tetheringBtn, &ButtonControl::clicked, [=]() { HardwareEon::launch_tethering(); });
   layout->addWidget(tetheringBtn);
 
   //auto androidBtn = new ButtonControl("\U00002699 Android Setting", "OPEN");
-  auto androidBtn = new ButtonControl("\U00002699 안드로이드 설정", "열기");
+  auto androidBtn = new ButtonControl("\U00002699 إعدادات الأندرويد", "افتح");
   QObject::connect(androidBtn, &ButtonControl::clicked, [=]() { HardwareEon::launch_setting(); });
   layout->addWidget(androidBtn);
 
@@ -383,10 +383,10 @@ QWidget * network_panel(QWidget * parent) {
 
   const char* gitpull = "sh /data/openpilot/scripts/gitpull.sh";
   //auto gitpullbtn = new ButtonControl("Git Fetch and Reset", "RUN");
-  auto gitpullbtn = new ButtonControl("Git Fetch and Reset", "실행");
+  auto gitpullbtn = new ButtonControl("Git Fetch and Reset", "تشغيل");
   QObject::connect(gitpullbtn, &ButtonControl::clicked, [=]() {
     //if (ConfirmationDialog::confirm("Process?", w)){
-    if (ConfirmationDialog::confirm("실행하시겠습니까?", w)){
+    if (ConfirmationDialog::confirm("هل تريد التأكيد?", w)){
       std::system(gitpull);
       QTimer::singleShot(1000, []() { Hardware::reboot(); });
     }
@@ -395,10 +395,10 @@ QWidget * network_panel(QWidget * parent) {
 
   const char* realdata_clear = "rm -rf /sdcard/realdata/*";
   //auto realdataclearbtn = new ButtonControl("Driving log Delete", "RUN");
-  auto realdataclearbtn = new ButtonControl("주행로그 삭제", "실행");
+  auto realdataclearbtn = new ButtonControl("حذف سجل القيادة", "تشغيل");
   QObject::connect(realdataclearbtn, &ButtonControl::clicked, [=]() {
     //if (ConfirmationDialog::confirm("Process?", w)){
-    if (ConfirmationDialog::confirm("실행하시겠습니까?", w)) {
+    if (ConfirmationDialog::confirm("هل تريد التأكيد?", w)) {
       std::system(realdata_clear);
     }
   });
@@ -406,10 +406,10 @@ QWidget * network_panel(QWidget * parent) {
 
   const char* panda_flash = "sh /data/openpilot/panda/board/flash.sh";
   //auto pandaflashbtn = new ButtonControl("Panda Firmware Flash", "RUN");
-  auto pandaflashbtn = new ButtonControl("판다 펌웨어 플래싱", "실행");
+  auto pandaflashbtn = new ButtonControl("تنزيل برنامج الباندا", "تشغيل");
   QObject::connect(pandaflashbtn, &ButtonControl::clicked, [=]() {
     //if (ConfirmationDialog::confirm("Process?", w)){
-    if (ConfirmationDialog::confirm("실행하시겠습니까?", w)){
+    if (ConfirmationDialog::confirm("هل تريد التأكيد?", w)){
       std::system(panda_flash);
       QTimer::singleShot(1000, []() { Hardware::reboot(); });
     }
@@ -418,10 +418,10 @@ QWidget * network_panel(QWidget * parent) {
 
   const char* panda_recover = "sh /data/openpilot/panda/board/recover.sh";
   //auto pandarecoverbtn = new ButtonControl("Panda Firmware Recover", "RUN");
-  auto pandarecoverbtn = new ButtonControl("판다 펌웨어 복구", "실행");
+  auto pandarecoverbtn = new ButtonControl("إسترجاع برنامج الباندا", "تشغيل");
   QObject::connect(pandarecoverbtn, &ButtonControl::clicked, [=]() {
     //if (ConfirmationDialog::confirm("Process?", w)){
-    if (ConfirmationDialog::confirm("실행하시겠습니까?", w)){
+    if (ConfirmationDialog::confirm("هل تريد التأكيد?", w)){
       std::system(panda_recover);
       QTimer::singleShot(1000, []() { Hardware::reboot(); });
     }

@@ -61,20 +61,20 @@ void Sidebar::updateState(const UIState &s) {
   }
   setProperty("connectStatus", QVariant::fromValue(connectStatus));
 
-  ItemStatus tempStatus = {"HIGH\nTEMP", danger_color};
+  ItemStatus tempStatus = {"عالية\nالحرارة", danger_color};
   auto ts = deviceState.getThermalStatus();
   if (ts == cereal::DeviceState::ThermalStatus::GREEN) {
-    tempStatus = {"GOOD\nTEMP", good_color};
+    tempStatus = {"متوسطة\nالحرارة", good_color};
   } else if (ts == cereal::DeviceState::ThermalStatus::YELLOW) {
-    tempStatus = {"OK\nTEMP", warning_color};
+    tempStatus = {"جيدة\nالحرارة", warning_color};
   }
   setProperty("tempStatus", QVariant::fromValue(tempStatus));
 
 //  ItemStatus pandaStatus = {"VEHICLE\nONLINE", good_color};
-  ItemStatus pandaStatus = {"차량\n연결됨", good_color};
+  ItemStatus pandaStatus = {"المركبة\nمتصلة", good_color};
   if (s.scene.pandaType == cereal::PandaState::PandaType::UNKNOWN) {
 //    pandaStatus = {"NO\nPANDA", danger_color};
-    pandaStatus = {"차량\n연결안됨", danger_color};
+    pandaStatus = {"المركبة\nغير متصلة", danger_color};
   } else if (s.scene.started && !sm["liveLocationKalman"].getLiveLocationKalman().getGpsOK()) {
     pandaStatus = {"GPS\nSEARCHING", warning_color};
 /*

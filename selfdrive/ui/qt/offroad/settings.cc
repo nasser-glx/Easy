@@ -39,8 +39,8 @@ TogglesPanel::TogglesPanel(QWidget *parent) : QWidget(parent) {
   toggles.append(new ParamControl("OpenpilotEnabledToggle",
                                   //"Enable openpilot",
                                   //"Use the openpilot system for adaptive cruise control and lane keep driver assistance. Your attention is required at all times to use this feature. Changing this setting takes effect when the car is powered off.",
-                                  "오픈파일럿 사용",
-                                  "오픈파일럿을 사용하여 조향보조 기능을 사용합니다. 항상 핸들을 잡고 도로를 주시하세요.",
+                                  "استخدم أوبن بايلوت",
+                                  "يتم استخدام وظيفة المساعدة في التوجيه باستخدام برنامج أوبن بايلوت. امسك عجلة القيادة دائمًا وراقب الطريق.",
                                   "../assets/offroad/icon_openpilot.png",
                                   this));
 /*
@@ -53,36 +53,36 @@ TogglesPanel::TogglesPanel(QWidget *parent) : QWidget(parent) {
   toggles.append(new ParamControl("IsMetric",
                                   //"Use Metric System",
                                   //"Display speed in km/h instead of mp/h.",
-                                  "미터법 사용",
-                                  "주행속도 표시를 ㎞/h로 변경합니다",
+                                  "استخدام متري",
+                                  "قم بتغيير عرض سرعة القيادة إلى كلم / س",
                                   "../assets/offroad/icon_metric.png",
                                   this));
   toggles.append(new ParamControl("CommunityFeaturesToggle",
                                   //"Enable Community Features",
                                   //"Use features from the open source community that are not maintained or supported by comma.ai and have not been confirmed to meet the standard safety model. These features include community supported cars and community supported hardware. Be extra cautious when using these features",
-                                  "커뮤니티 기능 사용",
-                                  "커뮤니티기능은 comma.ai에서 공식적으로 지원하는 기능이 아니므로 사용시 주의하세요.",
+                                  "استخدم ميزات المجتمع",
+                                  "يرجى ملاحظة أن وظيفة المجتمع غير مدعومة رسميًا بواسطة comma.ai..",
                                   "../assets/offroad/icon_discord.png",
                                   this));
   toggles.append(new ParamControl("IsLdwEnabled",
                                   //"Enable Lane Departure Warnings",
                                   //"Receive alerts to steer back into the lane when your vehicle drifts over a detected lane line without a turn signal activated while driving over 31mph (50kph).",
-                                  "차선이탈 경보 사용",
-                                  "40㎞/h 이상의 속도로 주행시 방향지시등 조작없이 차선을 이탈하면 차선이탈경보를 보냅니다. (오픈파일럿 비활성상태에서만 사용됩니다)",
+                                  "استخدام تنبيه مغادرة المسار",
+                                  "عند القيادة بسرعة 40 كم / ساعة أو أكثر ، يتم إرسال تحذير مغادرة المسار إذا انحرفت السيارة عن الحارة بدون تشغيل مصباح إشارة الانعطاف. (يستخدم فقط عندما يكون أوبن بايلوت غير نشط)",
                                   "../assets/offroad/icon_ldws.png",
                                   this));
   toggles.append(new ParamControl("AutoLaneChangeEnabled",
                                   //"Enable AutoLaneChange",
                                   //"Operation of the turn signal at 60㎞/h speed will result in a short change of the vehicle",
-                                  "자동 차선변경 사용",
-                                  "60㎞/h 이상의 속도로 주행시 방향지시등을 작동하면 잠시후 자동차선변경을 수행합니다. 안전한 사용을위해 후측방감지기능이 있는 차량만 사용하시기바랍니다.",
+                                  "استخدم التغيير التلقائي للمسار",
+                                  "عند القيادة بسرعة 15 كم / ساعة أو أكثر ، إذا تم تنشيط إشارة الانعطاف ، فسيتم تغيير حارة السيارة بعد فترة. للاستخدام الآمن ، استخدم فقط المركبات المزودة بوظيفة الكشف عن الجانب الخلفي..",
                                   "../assets/offroad/icon_lca.png",
                                   this));
   toggles.append(new ParamControl("UploadRaw",
                                   //"Upload Raw Logs",
                                   //"Upload full logs at [ connect.comma.ai/useradmin ]",
-                                  "주행로그 업로드",
-                                  "주행로그를 업로드합니다. [ connect.comma.ai/useradmin ] 에서 확인할수있습니다",
+                                  "تحميل سجل القيادة",
+                                  "قم بتحميل سجل القيادة الخاص بك. يمكنك التحقق منه على [connect.comma.ai/useradmin]",
                                   "../assets/offroad/icon_network.png",
                                   this));
   toggles.append(new ParamControl("EndToEndToggle",
@@ -131,15 +131,15 @@ DevicePanel::DevicePanel(QWidget* parent) : QWidget(parent) {
   // offroad-only buttons
 
   //auto dcamBtn = new ButtonControl("Driver Camera", "PREVIEW", "Preview the driver facing camera to help optimize device mounting position for best driver monitoring experience. (vehicle must be off)");
-  auto dcamBtn = new ButtonControl("운전자 모니터링 카메라 미리보기", "실행", "운전자 모니터링 카메라를 미리보고 최적의 장착위치를 찾아보세요.");
+  auto dcamBtn = new ButtonControl("معاينة كاميرا مراقبة السائق", "تنفيذ", "قم بمعاينة كاميرا مراقبة السائق وابحث عن أفضل مكان للتركيب.");
   connect(dcamBtn, &ButtonControl::clicked, [=]() { emit showDriverView(); });
 
-  QString resetCalibDesc = "범위 (pitch) ↕ 5˚ (yaw) ↔ 4˚이내";
+  QString resetCalibDesc = "نطاق (pitch) ↕ 5˚ (yaw) ↔ في غضون 4˚";
   //auto resetCalibBtn = new ButtonControl("Reset Calibration", "RESET", resetCalibDesc);
-  auto resetCalibBtn = new ButtonControl("캘리브레이션 초기화", "실행", resetCalibDesc);
+  auto resetCalibBtn = new ButtonControl("إعادة ضبط المعايرة", "تنفيذ", resetCalibDesc);
   connect(resetCalibBtn, &ButtonControl::clicked, [=]() {
     //if (ConfirmationDialog::confirm("Process?", this)) {
-    if (ConfirmationDialog::confirm("실행하시겠습니까?", this)) {
+    if (ConfirmationDialog::confirm("هل تريد المتابعة?", this)) {
       Params().remove("CalibrationParams");
     }
   });
@@ -155,13 +155,13 @@ DevicePanel::DevicePanel(QWidget* parent) : QWidget(parent) {
           double pitch = calib.getRpyCalib()[1] * (180 / M_PI);
           double yaw = calib.getRpyCalib()[2] * (180 / M_PI);
           //desc += QString("\nThe current calibration location is [ %2 %1° / %4 %3° ]")
-          desc += QString("\n현재 캘리브레이션된 위치는 [ %2 %1° / %4 %3° ] 입니다.")
+          desc += QString("\nموضع المعايرة الحالي هو [٪ 2٪ 1 ° /٪ 4٪ 3 °].")
                                 .arg(QString::number(std::abs(pitch), 'g', 1), pitch > 0 ? "↑" : "↓",
                                      QString::number(std::abs(yaw), 'g', 1), yaw > 0 ? "→" : "←");
         }
       } catch (kj::Exception) {
         //qInfo() << "invalid CalibrationParams";
-        qInfo() << "캘리브레이션 상태가 유효하지않습니다";
+        qInfo() << "حالة المعايرة غير صالحة";
       }
     }
     resetCalibBtn->setDescription(desc);
@@ -170,10 +170,10 @@ DevicePanel::DevicePanel(QWidget* parent) : QWidget(parent) {
   ButtonControl *retrainingBtn = nullptr;
   if (!params.getBool("Passive")) {
     //retrainingBtn = new ButtonControl("Review Training Guide", "REVIEW", "Review the rules, features, and limitations of openpilot");
-    retrainingBtn = new ButtonControl("트레이닝 가이드", "실행", "");
+    retrainingBtn = new ButtonControl("دليل التدريب", "تنفيذ", "");
     connect(retrainingBtn, &ButtonControl::clicked, [=]() {
       //if (ConfirmationDialog::confirm("Process?", this)) {
-      if (ConfirmationDialog::confirm("실행하시겠습니까?", this)) {
+      if (ConfirmationDialog::confirm("هل تريد المتابعة?", this)) {
         Params().remove("CompletedTrainingVersion");
         emit reviewTrainingGuide();
       }
@@ -200,12 +200,12 @@ DevicePanel::DevicePanel(QWidget* parent) : QWidget(parent) {
 
   // addfunc button
   const char* addfunc = "cp -f /data/openpilot/installer/fonts/driver_monitor.py /data/openpilot/selfdrive/monitoring";
-  QPushButton *addfuncbtn = new QPushButton("추가기능");
+  QPushButton *addfuncbtn = new QPushButton("ميزات إضافية");
   addfuncbtn->setStyleSheet("height: 120px;border-radius: 15px;background-color: #393939;");
   reset_layout->addWidget(addfuncbtn);
   QObject::connect(addfuncbtn, &QPushButton::released, [=]() {
     //if (ConfirmationDialog::confirm("Process?", this)){
-    if (ConfirmationDialog::confirm("실행하시겠습니까?", this)) {
+    if (ConfirmationDialog::confirm("هل تريد المتابعة?", this)) {
       std::system(addfunc);
       emit closeSettings();
       QTimer::singleShot(1000, []() {
@@ -220,7 +220,7 @@ DevicePanel::DevicePanel(QWidget* parent) : QWidget(parent) {
   reset_layout->addWidget(reset_calib_btn);
   QObject::connect(reset_calib_btn, &QPushButton::released, [=]() {
     //if (ConfirmationDialog::confirm("Process?", this)) {
-    if (ConfirmationDialog::confirm("실행하시겠습니까?", this)) {
+    if (ConfirmationDialog::confirm("هل تريد المتابعة?", this)) {
       Params().remove("CalibrationParams");
       Params().remove("LiveParameters");
       emit closeSettings();
@@ -236,7 +236,7 @@ DevicePanel::DevicePanel(QWidget* parent) : QWidget(parent) {
   power_layout->setSpacing(30);
 
   // softreset button
-  QPushButton *restart_openpilot_btn = new QPushButton("재시작");
+  QPushButton *restart_openpilot_btn = new QPushButton("إعادة التشغيل");
   restart_openpilot_btn->setStyleSheet("height: 120px;border-radius: 15px;background-color: #393939;");
   power_layout->addWidget(restart_openpilot_btn);
   QObject::connect(restart_openpilot_btn, &QPushButton::released, [=]() {
@@ -247,12 +247,12 @@ DevicePanel::DevicePanel(QWidget* parent) : QWidget(parent) {
   });
 
   //QPushButton *reboot_btn = new QPushButton("Reboot");
-  QPushButton *reboot_btn = new QPushButton("재부팅");
+  QPushButton *reboot_btn = new QPushButton("إعادة التشغيل");
   reboot_btn->setObjectName("reboot_btn");
   power_layout->addWidget(reboot_btn);
   QObject::connect(reboot_btn, &QPushButton::clicked, [=]() {
     //if (ConfirmationDialog::confirm("Process?", this)) {
-    if (ConfirmationDialog::confirm("실행하시겠습니까?", this)) {
+    if (ConfirmationDialog::confirm("هل تريد المتابعة?", this)) {
       Hardware::reboot();
     }
   });
@@ -263,7 +263,7 @@ DevicePanel::DevicePanel(QWidget* parent) : QWidget(parent) {
   power_layout->addWidget(poweroff_btn);
   QObject::connect(poweroff_btn, &QPushButton::clicked, [=]() {
     //if (ConfirmationDialog::confirm("Process?", this)) {
-    if (ConfirmationDialog::confirm("실행하시겠습니까?", this)) {
+    if (ConfirmationDialog::confirm("هل تريد المتابعة?", this)) {
       Hardware::poweroff();
     }
   });
@@ -306,9 +306,9 @@ SoftwarePanel::SoftwarePanel(QWidget* parent) : QWidget(parent) {
     main_layout->addWidget(widgets[i]);
   }
 
-  auto uninstallBtn = new ButtonControl(getBrand() + " 제거", "실행");
+  auto uninstallBtn = new ButtonControl(getBrand() + " إزالة ", "تنفيذ");
   connect(uninstallBtn, &ButtonControl::clicked, [=]() {
-    if (ConfirmationDialog::confirm("실행하시겠습니까?", this)) {
+    if (ConfirmationDialog::confirm("هل تريد المتابعة?", this)) {
       Params().putBool("DoUninstall", true);
     }
   });
@@ -500,15 +500,15 @@ SettingsWindow::SettingsWindow(QWidget *parent) : QFrame(parent) {
 
   QList<QPair<QString, QWidget *>> panels = {
     //{"Device", device},
-    {"장치", device},
+    {"جهاز", device},
     //{"Network", network_panel(this)},
-    {"설정", network_panel(this)},
+    {"تعيين", network_panel(this)},
     //{"Toggles", new TogglesPanel(this)},
-    {"토글", new TogglesPanel(this)},
+    {"تبديل", new TogglesPanel(this)},
     //{"Software", new SoftwarePanel(this)},
-    {"정보", new SoftwarePanel(this)},
+    {"معلومة", new SoftwarePanel(this)},
     //{"Community", new CommunityPanel(this)},
-    {"커뮤니티", new CommunityPanel(this)},
+    {"تواصل اجتماعي", new CommunityPanel(this)},
   };
 
 #ifdef ENABLE_MAPS
@@ -645,23 +645,23 @@ CommunityPanel::CommunityPanel(QWidget* parent) : QWidget(parent) {
 
   toggles.append(new ParamControl("PutPrebuilt", "Prebuilt Enable",
                                   //"Create prebuilt files to speed bootup",
-                                  "Prebuilt 파일을 생성하며 부팅속도를 향상시킵니다.",
+                                  "Prebuilt يقوم بإنشاء ملف وتحسين سرعة التمهيد.",
                                   "../assets/offroad/icon_addon.png", this));
   toggles.append(new ParamControl("DisableShutdownd", "Shutdownd Disable",
                                   //"Disable Shutdownd",
-                                  "Shutdownd (시동 off 5분) 자동종료를 사용하지않습니다. (batteryless 기종)",
+                                  "Shutdownd (تبدأ 5 دقائق) لا تستخدم الإغلاق التلقائي. (batteryless انتفاخ البطاريات)",
                                   "../assets/offroad/icon_addon.png", this));
   toggles.append(new ParamControl("DisableLogger", "Logger Disable",
                                   //"Disable Logger is Reduce system load",
-                                  "Logger 프로세스를 종료하여 시스템 부하를 줄입니다.",
+                                  "Logger تقليل حمل النظام عن طريق إنهاء العمليات.",
                                   "../assets/offroad/icon_addon.png", this));
   toggles.append(new ParamControl("DisableGps", "GPS Disable",
                                   //"If you're using a panda without GPS, activate the option",
-                                  "Panda에 Gps가 장착되어있지않은 기기일경우 옵션을 활성화하세요.",
+                                  "Panda إذا لم يكن جهازك مزودًا بنظام تحديد المواقع العالمي (GPS) ، فيرجى تمكين الخيار.",
                                   "../assets/offroad/icon_addon.png", this));
   toggles.append(new ParamControl("UiTpms", "Ui Tpms Enable",
                                   //"Ui Tpms Enable (HKG only)",
-                                  "Ui에 Tpms 정보를 표시합니다 (HKG only)",
+                                  "عرض معلومات ضغط الإطارات في واجهة المستخدم (HKG فقط)",
                                   "../assets/offroad/icon_addon.png", this));
 
   for(ParamControl *toggle : toggles) {

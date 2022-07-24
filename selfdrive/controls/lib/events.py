@@ -777,7 +777,7 @@ EVENTS: Dict[int, Dict[str, Union[Alert, Callable[[Any, messaging.SubMaster, boo
     #ET.PERMANENT: NormalPermanentAlert("Calibration Invalid", "Remount Device and Recalibrate"),
     #ET.SOFT_DISABLE: SoftDisableAlert("Calibration Invalid: Remount Device & Recalibrate"),
     #ET.NO_ENTRY: NoEntryAlert("Calibration Invalid: Remount Device & Recalibrate"),
-    ET.PERMANENT: NormalPermanentAlert("خطأ في المعايرة "،" أعد المعايرة بعد تغيير موقع الجهاز."),
+    ET.PERMANENT: NormalPermanentAlert("خطأ في المعايرة "," أعد المعايرة بعد تغيير موقع الجهاز."),
     ET.SOFT_DISABLE: SoftDisableAlert("خطأ في المعايرة: أعد المعايرة بعد تغيير موقع الجهاز"),
     ET.NO_ENTRY: NoEntryAlert("خطأ في المعايرة: أعد المعايرة بعد تغيير موقع الجهاز"),
   },

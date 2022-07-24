@@ -35,7 +35,7 @@ https://github.com/xx979xx/openpilot
     <td><a href="https://youtu.be/Asq9IBZ5EL8" title="Video By Greer Viau"><img src="https://i.imgur.com/1aVz6fu.png"></a></td>
     <td><a href="https://youtu.be/YfMKV0BCS3E" title="Video By Logan LeGrand"><img src="https://i.imgur.com/U2kBp1r.jpg"></a></td>
     <td><a href="https://youtu.be/fE3jcvNPKuU" title="Video By Charlie Kim"><img src="https://i.imgur.com/PInrzIG.jpg"></a></td>
-    <td><a href="https://youtu.be/CVj5Vxcrl8c" title="Video By Aragon"><img src="https://i.imgur.com/w6cZyoL.jpg"></a></td>
+    <td><a href="https://youtu.be/CVj5Vxcrl8c" title="Video By Aragon"><img src="https://i.imgur.com/l6ercNX.jpg"></a></td>
   </tr>
   <tr>
     <td><a href="https://youtu.be/iIUICQkdwFQ" title="Video By Logan LeGrand"><img src="https://i.imgur.com/b1LHQTy.jpg"></a></td>

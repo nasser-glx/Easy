@@ -22,7 +22,7 @@ TrackWidget::TrackWidget(QWidget *parent) : QWidget(parent) {
   QPixmap comma_img = QPixmap("../assets/img_spinner_comma.png").scaled(spinner_size, Qt::KeepAspectRatio, Qt::SmoothTransformation);
   QPixmap track_img = QPixmap("../assets/img_spinner_track.png").scaled(spinner_size, Qt::KeepAspectRatio, Qt::SmoothTransformation);
 
-  QTransform transform(1, 0, 0, 1, width() / 2, height() / 2);
+  QTransform transform(1, 0, 0, 1, width(1920) / 2, height(1080) / 2);
   QPixmap pm(spinner_size);
   QPainter p(&pm);
   p.setRenderHint(QPainter::SmoothPixmapTransform);

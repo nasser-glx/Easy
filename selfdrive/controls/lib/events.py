@@ -806,7 +806,7 @@ EVENTS: Dict[int, Dict[str, Union[Alert, Callable[[Any, messaging.SubMaster, boo
     #ET.SOFT_DISABLE: SoftDisableAlert("Seatbelt Unlatched"),
     #ET.NO_ENTRY: NoEntryAlert("Seatbelt Unlatched"),
     ET.PERMANENT: Alert(
-      "عدم ربط حزام الأمان",
+      "الرجاء ربط حزام الأمان",
       "",
       AlertStatus.normal, AlertSize.full,
       Priority.LOWEST, VisualAlert.none, AudibleAlert.none, 0., 0., .2, creation_delay=0.5),

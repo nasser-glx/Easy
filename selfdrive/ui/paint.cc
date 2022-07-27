@@ -469,7 +469,7 @@ static void ui_draw_measures_right(UIState *s, int x, int y, int w) {
 
     snprintf(val_str, sizeof(val_str), "%.0f", (round(cpuTempAvg)));
     strcat(val_str, val_add);
-    h += ui_draw_measure(s, val_str, "حرارة المعالج", rx, ry, val_color, lab_color, value_fontSize, label_fontSize);
+    h += ui_draw_measure(s, val_str, "CPU TEMP", rx, ry, val_color, lab_color, value_fontSize, label_fontSize);
     ry = y + h;
   }
 
@@ -489,7 +489,7 @@ static void ui_draw_measures_right(UIState *s, int x, int y, int w) {
 
     snprintf(val_str, sizeof(val_str), "%.1f",(angleSteers));
     strcat(val_str, val_add);
-    h += ui_draw_measure(s, val_str, "زاوية المقود", rx, ry, val_color, lab_color, value_fontSize, label_fontSize);
+    h += ui_draw_measure(s, val_str, "Steer Angle", rx, ry, val_color, lab_color, value_fontSize, label_fontSize);
     ry = y + h;
   }
 
@@ -510,7 +510,7 @@ static void ui_draw_measures_right(UIState *s, int x, int y, int w) {
 
     snprintf(val_str, sizeof(val_str), "%.1f",(steeringAngleDeg));
     strcat(val_str, val_add);
-    h += ui_draw_measure(s, val_str, "زاوية التوجيه", rx, ry, val_color, lab_color, value_fontSize, label_fontSize);
+    h += ui_draw_measure(s, val_str, "steerin Deg", rx, ry, val_color, lab_color, value_fontSize, label_fontSize);
     ry = y + h;
   }
 
@@ -535,7 +535,7 @@ static void ui_draw_measures_right(UIState *s, int x, int y, int w) {
     }
 
     strcat(val_str, val_add);
-    h += ui_draw_measure(s, val_str, "فرق المسافة", rx, ry, val_color, lab_color, value_fontSize, label_fontSize);
+    h += ui_draw_measure(s, val_str, "Dis Duf", rx, ry, val_color, lab_color, value_fontSize, label_fontSize);
     ry = y + h;
   }
 
@@ -560,7 +560,7 @@ static void ui_draw_measures_right(UIState *s, int x, int y, int w) {
     }
 
     strcat(val_str, val_add);
-    h +=ui_draw_measure(s, val_str, "فرق السرعة", rx, ry, val_color, lab_color, value_fontSize, label_fontSize);
+    h +=ui_draw_measure(s, val_str, "Speed Dif", rx, ry, val_color, lab_color, value_fontSize, label_fontSize);
     ry = y + h;
   }
 

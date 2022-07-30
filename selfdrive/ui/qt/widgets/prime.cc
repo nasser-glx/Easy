@@ -133,24 +133,24 @@ PrimeAdWidget::PrimeAdWidget(QWidget* parent) : QFrame(parent) {
   main_layout->setContentsMargins(80, 90, 80, 60);
   main_layout->setSpacing(0);
 
-  QLabel *upgrade = new QLabel("قم بالاشتراك الان");
+  QLabel *upgrade = new QLabel("المزايا المضافة");
   upgrade->setStyleSheet("font-size: 70px; font-weight: bold;");
   main_layout->addWidget(upgrade, 0, Qt::AlignTop);
   main_layout->addSpacing(50);
 
-  QLabel *description = new QLabel("كن عضوًا رئيسيًا بكوما في connect.comma.ai");
+  QLabel *description = new QLabel("تظام المساعرد على القيادة");
   description->setStyleSheet("font-size: 55px; font-weight: light; color: white;");
   description->setWordWrap(true);
   main_layout->addWidget(description, 0, Qt::AlignTop);
 
   main_layout->addStretch();
 
-  QLabel *features = new QLabel("ميزات كوما برايم:");
+  QLabel *features = new QLabel("في الطرقات السريعة HDA:II:");
   features->setStyleSheet("font-size: 35px; font-weight: bold; color: #E5E5E5;");
   main_layout->addWidget(features, 0, Qt::AlignBottom);
   main_layout->addSpacing(30);
 
-  QVector<QString> bullets = {"الوصول عن بعد", "14 يومًا من التخزين", "امتيازات المطور"};
+  QVector<QString> bullets = {"نظام مراقبة السائق", "نظام تتبع المركبات", "نظام تغيير المسار"};
   for (auto &b: bullets) {
     const QString check = "<b><font color='#465BEA'>✓</font></b> ";
     QLabel *l = new QLabel(check + b);

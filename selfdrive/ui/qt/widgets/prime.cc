@@ -138,14 +138,14 @@ PrimeAdWidget::PrimeAdWidget(QWidget* parent) : QFrame(parent) {
   main_layout->addWidget(upgrade, 0, Qt::AlignTop);
   main_layout->addSpacing(50);
 
-  QLabel *description = new QLabel("تظام المساعرد على القيادة");
+  QLabel *description = new QLabel("نظام المساعد على القيادة");
   description->setStyleSheet("font-size: 55px; font-weight: light; color: white;");
   description->setWordWrap(true);
   main_layout->addWidget(description, 0, Qt::AlignTop);
 
   main_layout->addStretch();
 
-  QLabel *features = new QLabel("HDA:II في الطرقات السريعة:");
+  QLabel *features = new QLabel("HDA:II في الطرقات السريعة");
   features->setStyleSheet("font-size: 35px; font-weight: bold; color: #E5E5E5;");
   main_layout->addWidget(features, 0, Qt::AlignBottom);
   main_layout->addSpacing(30);

@@ -145,7 +145,7 @@ PrimeAdWidget::PrimeAdWidget(QWidget* parent) : QFrame(parent) {
 
   main_layout->addStretch();
 
-  QLabel *features = new QLabel("في الطرقات السريعة HDA:II:");
+  QLabel *features = new QLabel("HDA:II في الطرقات السريعة:");
   features->setStyleSheet("font-size: 35px; font-weight: bold; color: #E5E5E5;");
   main_layout->addWidget(features, 0, Qt::AlignBottom);
   main_layout->addSpacing(30);
